@@ -1,16 +1,17 @@
 * INSTALL
 - unix
 
-  #+BEGIN_SRC shell
+  #+BEGIN_QUOTE
+
   git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
   cd ~/.emacs.d/
   make all
-  #+END_SRC
+  #+END_QUOTE
 
 - windows
   Open git bash
-  #+BEGIN_SRC shell
+  #+BEGIN_QUOTE
   git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
   cd ~/.emacs.d/
   bin/doom install
-  #+END_SRC
+  #+END_QUOTE
