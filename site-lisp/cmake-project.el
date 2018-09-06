@@ -79,7 +79,7 @@
 (defvar cp-cmake-cache-filename "CMakeCache.txt"
   "CMake cache filename.")
 
-(defvar cp-cmake-compile-commands "compile_commands.json"
+(defvar cp-root-file "compile_commands.json"
   "CMake compile commands filename.")
 
 (defvar cp-default-run-terminal-buffer "eshell"
@@ -159,9 +159,9 @@ NAME is project name."
         path
       nil)))
 
-(defun cp--get-cmake-compile-commands(dir)
-  "Get `compile_commands.json'"
-  (let ((path (expand-file-name cp-cmake-compile-commands dir)))
+(defun cp--get-root-file(dir)
+  "Get `root-file'"
+  (let ((path (expand-file-name cp-root-file dir)))
     (if (file-exists-p path)
         path
       nil)))
@@ -187,7 +187,7 @@ NAME is project name."
       (progn
         (while (and (< i 16) (not found) (not (string-equal "/" current-dir)))
           (if (and (not (cp--get-cmake-cache current-dir))
-                   (cp--get-cmake-compile-commands current-dir))
+                   (cp--get-root-file current-dir))
               (progn (setq cp-root-dir current-dir)
                      (setq found t))
             (setq current-dir (cp--parent-dir current-dir))
