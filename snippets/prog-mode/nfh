@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: new file head
+# key: nfh
+# --
+`(yas-make-line)`
+`(concat
+         comment-start (if (string-empty-p comment-end) comment-start) "\t\tAuthor: " user-full-name "\t\t" comment-end "\n"
+         comment-start (if (string-empty-p comment-end) comment-start) "\t\tDate  : " (format-time-string "%Y-%m-%d" (current-time)) "\t\t" comment-end"\n"
+         comment-start (if (string-empty-p comment-end) comment-start) "\t\tUpdate: " "\t\t" comment-end
+)`
+`(yas-make-line)`

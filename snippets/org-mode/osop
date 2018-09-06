@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: osop
+# key: osop
+# --
+#+BEGIN_SRC octave :results value file
+figure(1, "visible", "off");
+$1
+print -dpng "~/Documents/Blog/images/octave/octave$2`(format-time-string "_%Y%H%M%S")`.png";
+ans = "~/Documents/Blog/images/octave/octave$2`(format-time-string "_%Y%H%M%S")`.png";
+#+END_SRC

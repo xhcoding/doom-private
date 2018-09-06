@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: opencv
+# key: opencv
+# --
+
+#include <iostream>
+#include "../opencv.hpp"
+
+using namespace std;
+
+int main(int argc, char **argv) {
+    if (argc != 2)  {
+        cerr << "Please input arguments!" << endl;
+        exit(1);
+    }
+
+    cv::Mat image = cv::imread(argv[1]);
+
+    waitPressESC()
+    return 0;    
+}

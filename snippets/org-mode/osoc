@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: osoc
+# key: osoc
+# --
+#+BEGIN_SRC octave
+$0
+#+END_SRC
