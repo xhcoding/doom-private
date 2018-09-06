@@ -22,8 +22,6 @@
 (package! visual-regexp)
 (package! visual-regexp-steroids)
 
-(package! company-english-helper :ignore t)
-
 (package! company-posframe)
 
 (package! eaf :ignore t)
