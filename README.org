@@ -46,9 +46,17 @@ bin/doom install
 cquery和ccls一样，是用于C/C++补全，跳转等功能的服务端程序，DevTools有一个
 已经编译好的版本，可以直接使用。
 cquery安装文档：https://github.com/cquery-project/cquery/wiki
+*** Irony[可选安装]
+cquery不工作时使用irony。
+打开emacs中的eshell运行以下命令
+#+BEGIN_SRC shell
+mkdir temp
+cmake -DCMAKE_PREFIX_PATH=c:/Users/xhcoding/Desktop/DevTools/cquery/build/LLVM-6.0.1-win64 -DCLANG_RESOURCE_DIR= c:/Users/xhcoding/Desktop/DevTools/cquery/build/LLVM-6.0.1-win64/lib/clang/6.0.1 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_INSTALL_PREFIX=c:/Users/xhcoding/.emacs.d/.local/etc/irony-server c:/Users/xhcoding/.emacs.d/.local/packages/elpa/irony-20180703.1740/server && cmake --build . --use-stderr --config Release --target install
+rm -rf temp
+#+END_SRC
 *** Visual Studio[可选安装]
 Visual Studio是一个IDE，安装它的目的是编译及调试程序，你也可以不安装而使用Mingw
-提供的gcc/g++和gdb编译调试程序。
+提供的gcc/g++和gdb编译调试程序
 *** 软件路径问题
 由于Emacs里运行程序需要知道程序的运行路径，一个方法是把各个软件的运行程序路径加
 在系统的=PATH=环境变量里，这样在任何终端(cmd powershell等)都能直接运行程序。由于
