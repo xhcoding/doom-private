@@ -1,9 +1,0 @@
-[submodule "site-lisp/isolate"]
-	path = site-lisp/isolate
-	url = https://github.com/casouri/isolate.git
-[submodule "site-lisp/company-english-helper"]
-	path = site-lisp/company-english-helper
-	url = https://github.com/manateelazycat/company-english-helper.git
-[submodule "site-lisp/org-octopress"]
-	path = site-lisp/org-octopress
-	url = https://github.com/xhcoding/org-octopress.git
