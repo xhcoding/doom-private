@@ -20,6 +20,11 @@
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 50
         lsp-ui-sideline-ignore-duplicate t
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-symbol nil
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-flycheck nil
+        lsp-ui-sideline-show-code-actions nil
         )
   (map!
    :map lsp-ui-peek-mode-map

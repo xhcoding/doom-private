@@ -76,11 +76,11 @@
 ;;;###autoload
 (defun +my/toggle-auto-save()
   (interactive)
-  (if +my--auto-save-timer
+  (if +my-auto-save-timer
       (progn
-        (cancel-timer +my--auto-save-timer)
-        (setq +my--auto-save-timer nil))
-    (setq +my--auto-save-timer (auto-save-enable))))
+        (cancel-timer +my-auto-save-timer)
+        (setq +my-auto-save-timer nil))
+    (setq +my-auto-save-timer (auto-save-enable))))
 
 ;;;###autoload
 (defun +my/rename-this-file-and-buffer (new-name)

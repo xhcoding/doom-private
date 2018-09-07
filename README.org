@@ -1,16 +1,60 @@
-* INSTALL
-** unix
-#+BEGIN_SRC
+* 安装
+** Linux
+*** 前置软件
+git clang cmake gcc gdb make
+- Arch Linux ~pacman -S git clang cmake gcc gdb make~
+*** Emacs
+要求Emacs的版本在25.1以上
+- Arch Linux ~pacman -S emacs~ 或 ~pacman -S emacs-git~
+*** Doom及Doom-Private
+Doom Emacs的核心和本仓库的文件，即Doom-Emacs的C/C++配置等
+#+BEGIN_SRC shell
+git clone -b develop https://github.com/hlissner/.emacs.d ~/.emacs.d
 git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
-cd ~/.emacs.d/
+cd ~/.emacs.d
 make all
 #+END_SRC
 
-** windows
-Open git bash
-#+BEGIN_SRC
+*** ccls
+补全C/C++需要的服务端
+安装文档:https://github.com/MaskRay/ccls/wiki/Getting-started
+Arch Linux可以直接安装：~pacman -S ccls-git~
 
+** Windows
+*** 前置软件
+为了方便，我把需要的软件打包了一份，放在百度云里。链接:
+https://pan.baidu.com/s/11QS8YGMl7p-hXB7YDB_pmA 密码: p7xi
+
+- 下载DevTools的所有文件，解压到桌面的DevTools文件夹。
+- 把fonts里的所有字体文件复制到~C:\Windows\Fonts~
+*** 环境变量设置
+设置HOME环境变量，最好为~C:\Users\%user%~ %user%为你的用户名
+*** Emacs
+直接到官网下载最新版本
+*** 安装Doom-Emacs及Doom-Private
+1. 打开DevTools下的PortableGit里的git-bash
+2. 依次运行以下命令
+
+#+BEGIN_SRC
+git clone -b develop https://github.com/hlissner/.emacs.d ~/.emacs.d
 git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
 cd ~/.emacs.d/
 bin/doom install
 #+END_SRC
+*** cquery
+cquery和ccls一样，是用于C/C++补全，跳转等功能的服务端程序，DevTools有一个
+已经编译好的版本，可以直接使用。
+cquery安装文档：https://github.com/cquery-project/cquery/wiki
+*** Visual Studio[可选安装]
+Visual Studio是一个IDE，安装它的目的是编译及调试程序，你也可以不安装而使用Mingw
+提供的gcc/g++和gdb编译调试程序。
+*** 软件路径问题
+由于Emacs里运行程序需要知道程序的运行路径，一个方法是把各个软件的运行程序路径加
+在系统的~PATH~环境变量里，这样在任何终端(cmd powershell等)都能直接运行程序。由于
+我不用系统的那些终端，所以这里使用的方法是在Emacs内部把路径加在~PATH~里，如果你
+更改了DevTools下程序的位置，请修改[[https://github.com/xhcoding/doom-private/blob/master/%2Bpath.el][+path.el]]里的内容
+* 效果展示
+[[img/linux.gif]]
+* TODO
+- [ ] 完善文档
+- [ ] 改进cmake-project.el
