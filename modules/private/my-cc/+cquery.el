@@ -5,7 +5,7 @@
   (add-hook! (c-mode c++-mode) #'+my-cc/enable-lsp-or-irony)
   :config
   (setq cquery-executable (expand-file-name "cquery/build/release/bin/cquery.exe" +my-devtools-path)
-  )
+  ))
 
 (after! projectile
   (setq projectile-project-root-files-top-down-recurring
