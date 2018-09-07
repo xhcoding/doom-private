@@ -2,10 +2,10 @@
 ** Linux
 *** 前置软件
 git clang cmake gcc gdb make
-- Arch Linux ~pacman -S git clang cmake gcc gdb make~
+- Arch Linux =pacman -S git clang cmake gcc gdb make=
 *** Emacs
 要求Emacs的版本在25.1以上
-- Arch Linux ~pacman -S emacs~ 或 ~pacman -S emacs-git~
+- Arch Linux =pacman -S emacs= 或 =pacman -S emacs-git=
 *** Doom及Doom-Private
 Doom Emacs的核心和本仓库的文件，即Doom-Emacs的C/C++配置等
 #+BEGIN_SRC shell
@@ -19,7 +19,7 @@ make all
 补全C/C++需要的服务端
 安装文档:https://github.com/MaskRay/ccls/wiki/Getting-started
 
-Arch Linux可以直接安装：~pacman -S ccls-git~
+Arch Linux可以直接安装：=pacman -S ccls-git=
 
 ** Windows
 *** 前置软件
@@ -51,8 +51,8 @@ Visual Studio是一个IDE，安装它的目的是编译及调试程序，你也�
 提供的gcc/g++和gdb编译调试程序。
 *** 软件路径问题
 由于Emacs里运行程序需要知道程序的运行路径，一个方法是把各个软件的运行程序路径加
-在系统的~PATH~环境变量里，这样在任何终端(cmd powershell等)都能直接运行程序。由于
-我不用系统的那些终端，所以这里使用的方法是在Emacs内部把路径加在~PATH~里，如果你
+在系统的=PATH=环境变量里，这样在任何终端(cmd powershell等)都能直接运行程序。由于
+我不用系统的那些终端，所以这里使用的方法是在Emacs内部把路径加在=PATH=里，如果你
 更改了DevTools下程序的位置，请修改[[https://github.com/xhcoding/doom-private/blob/master/%2Bpath.el][+path.el]]里的内容
 * 效果展示
 [[img/linux.gif]]
