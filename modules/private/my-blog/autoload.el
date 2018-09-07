@@ -30,7 +30,6 @@
 (defun +my-blog-kill-new-img-link(prefix imagename)
   (kill-new (format "[[file:%s%s]] " prefix imagename imagename)))
 
-
 ;;;###autoload
 (defun +my-blog/capture-screenshot(basename)
   (interactive "sScreenshot name: ")

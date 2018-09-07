@@ -5,7 +5,7 @@
   "Blog root directory.")
 
 (defvar +my-blog-img-dir
-  (concat +my-blog-root-dir "images/")
+  (expand-file-name "images/" +my-blog-root-dir)
   "Blog's image directory.")
 
 (defvar +my-blog-res-url
@@ -13,6 +13,7 @@
 
 
 (def-package! org-octopress
+  :commands (org-octopress)
   :config
   (setq
    org-octopress-directory-top (expand-file-name "source" +my-blog-root-dir)
@@ -20,13 +21,6 @@
    org-octopress-directory-org-top +my-blog-root-dir
    org-octopress-directory-org-posts (expand-file-name "blog" +my-blog-root-dir)
    org-octopress-setup-file (expand-file-name "setupfile.org" +my-blog-root-dir)
-   )
-  (map!
-   (:leader
-     (:desc "open" :prefix "o"
-       :desc "Open blog" :n "B" #'+my-blog/open-org-octopress
-       )
-     )))
-
+   ))
 
 (advice-add #'org-export-file-uri :before-until #'+my-blog*export-blog-image-url)

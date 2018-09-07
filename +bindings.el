@@ -2,8 +2,6 @@
 (map! [remap indent-region] #'+my/indent-or-format
 
 
-      ;; global keybinds
-      :gnvime "<f7>"      #'projectile-compile-project
       :gnvime "M-g s"     #'sp-up-sexp
       :gnvime "M-g S"     #'sp-backward-sexp
       :gnvime "M-g k"     #'+my/kill-in-pair
@@ -26,13 +24,15 @@
 
       (:leader
         (:prefix "o"
-          :desc "agenda"           :n  "a"    #'org-agenda
-          :desc "debugger"         :n  "d"    #'+debugger:start)
+          :desc "Agenda"           :n  "a"    #'org-agenda
+          :desc "Blog"             :n  "B"    #'+my-blog/open-org-octopress
+          :desc "Debugger"         :n  "d"    #'+debugger:start)
         (:desc "toggle" :prefix "t"
           :desc "Transparency"     :n  "T"    #'+my/toggle-transparency
           :desc "Auto save"        :n  "a"    #'+my/toggle-auto-save
           :desc "Comment "         :n  "c"    #'comment-line
           :desc "Cycle theme"      :n  "t"    #'+my/toggle-cycle-theme
+          :desc "English Helper"   :n  "e"    #'toggle-company-english-helper
           )
         (:prefix "r"
           :desc "replace"          :n  "r"    #'vr/replace

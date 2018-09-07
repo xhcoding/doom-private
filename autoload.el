@@ -28,7 +28,7 @@
   (doom/reload-theme))
 
 ;;;###autoload
-(defun +my/support-format-p()
+(defun +my--support-format-p()
   (and (featurep! :editor format)
        (memq major-mode '(c-mode c++-mode emacs-lisp-mode java-mode python-mode))))
 
@@ -52,7 +52,7 @@
 ;;;###autoload
 (defun +my/indent-or-format(beg end)
   (interactive "r")
-  (if (+my/support-format-p)
+  (if (+my--support-format-p)
       (progn
         (+format/region-or-buffer beg end)
         (message "formated"))
@@ -76,11 +76,11 @@
 ;;;###autoload
 (defun +my/toggle-auto-save()
   (interactive)
-  (if +my-auto-save-timer
+  (if +my--auto-save-timer
       (progn
-        (cancel-timer +my-auto-save-timer)
-        (setq +my-auto-save-timer nil))
-    (setq +my-auto-save-timer (auto-save-enable))))
+        (cancel-timer +my--auto-save-timer)
+        (setq +my--auto-save-timer nil))
+    (setq +my--auto-save-timer (auto-save-enable))))
 
 ;;;###autoload
 (defun +my/rename-this-file-and-buffer (new-name)

@@ -1,32 +1,19 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; 一些目录
-(defvar +my-site-lisp-dir (expand-file-name "~/.config/doom/site-lisp"))
-(defvar +my-yas-snipper-dir (expand-file-name "~/.config/doom/snippets"))
-(defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
-
-(defvar +my-auto-save-timer nil)
-
-
-;; package archives
+;; 插件源
 (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
                          ("melpa" . "http://elpa.emacs-china.org/melpa/")
 			             ("org"   . "http://elpa.emacs-china.org/org/")))
 
+;; 一些目录
+(defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
+(defvar +my-yas-snipper-dir (expand-file-name "~/.config/doom/snippets"))
+(defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
 
 
 (setq user-full-name "xhcoding"
       user-mail-address "xhcoding@163.com")
 
-;; if lsp-mode enabled failed ,using irony instead
-(def-package-hook! irony
-  :pre-init
-  nil)
-(def-package-hook! flycheck-irony
-  :pre-init
-  nil
-  :pre-config
-  nil)
 
 (doom!
  :feature
@@ -109,8 +96,7 @@
  (default +bindings +snippets +evil-commands)
 
  :private
- my-lang
+ lsp
+ my-cc
  my-blog
  )
-
-

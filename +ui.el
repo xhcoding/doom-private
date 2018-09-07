@@ -7,7 +7,6 @@
 ;; disabled display line number
 (remove-hook! (prog-mode text-mode conf-mode) #'display-line-numbers-mode)
 
-
 ;; font
 (defun +my|init-font(frame)
   (with-selected-frame frame
