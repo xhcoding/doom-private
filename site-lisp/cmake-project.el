@@ -85,6 +85,8 @@
 (defvar cp-default-run-terminal-buffer "eshell"
   "Run in terminal buffer.")
 
+(defvar cp-default-open-terminal '+eshell/open-popup)
+
 ;;; Functions
 (defun cp--get-cmake-version()
   "Get cmake installed version."
@@ -130,7 +132,7 @@ NAME is project name."
   (expand-file-name cp-build-dir cp-root-dir))
 
 (defun cp--compile-commands-path()
-  (expand-file-name cp-cmake-compile-commands (cp--build-path)))
+  (expand-file-name cp-root-file (cp--build-path)))
 
 (defun cp--create-empty-compile-commands()
   (with-temp-file (cp--compile-commands-path)))
@@ -146,7 +148,7 @@ NAME is project name."
     (insert "int main() {}"))
   (cp--create-empty-compile-commands)
   (cp--create-symbol-link
-   (cp--compile-commands-path) (expand-file-name cp-cmake-compile-commands cp-root-dir))
+   (cp--compile-commands-path) (expand-file-name cp-root-file cp-root-dir))
   (find-file cp-root-cmakelists-path)
   (cp-cmake-config-project))
 
@@ -226,10 +228,16 @@ NAME is project name."
 (defun cp--binary-path()
   (expand-file-name cp-binary-dir cp-root-dir))
 
-;;TODO: fix first start eshell
+;;FIXME: fix first start eshell
 (defun cp-cmake-run-project-with-args(file args)
   (interactive (cp--read-run-args (cp--binary-path) t))
+  (unless (buffer-live-p cp-default-run-terminal-buffer)
+    (funcall cp-default-open-terminal (get-buffer-window)))
   (with-current-buffer cp-default-run-terminal-buffer
+    (let ((window (get-buffer-window)))
+      (unless window
+        (set-window-buffer (split-window-right) (current-buffer))
+        ))
     (eshell-return-to-prompt)
     (insert (format "%s %s" file args))
     (eshell-send-input)
