@@ -18,6 +18,7 @@ make all
 *** ccls
 补全C/C++需要的服务端
 安装文档:https://github.com/MaskRay/ccls/wiki/Getting-started
+
 Arch Linux可以直接安装：~pacman -S ccls-git~
 
 ** Windows
@@ -26,11 +27,11 @@ Arch Linux可以直接安装：~pacman -S ccls-git~
 https://pan.baidu.com/s/11QS8YGMl7p-hXB7YDB_pmA 密码: p7xi
 
 - 下载DevTools的所有文件，解压到桌面的DevTools文件夹。
-- 把fonts里的所有字体文件复制到~C:\Windows\Fonts~
+- 把fonts里的所有字体文件复制到 =C:\Windows\Fonts=
 *** 环境变量设置
-设置HOME环境变量，最好为~C:\Users\%user%~ %user%为你的用户名
+设置HOME环境变量，最好为 =C:\Users\%user%= %user%为你的用户名
 *** Emacs
-直接到官网下载最新版本
+直接到官网下载最新版本：https://www.gnu.org/software/emacs/download.html#windows
 *** 安装Doom-Emacs及Doom-Private
 1. 打开DevTools下的PortableGit里的git-bash
 2. 依次运行以下命令
@@ -55,6 +56,7 @@ Visual Studio是一个IDE，安装它的目的是编译及调试程序，你也�
 更改了DevTools下程序的位置，请修改[[https://github.com/xhcoding/doom-private/blob/master/%2Bpath.el][+path.el]]里的内容
 * 效果展示
 [[img/linux.gif]]
-* TODO
+* TODO 待完成
 - [ ] 完善文档
+- [ ] 录制一个更完善的效果图
 - [ ] 改进cmake-project.el
