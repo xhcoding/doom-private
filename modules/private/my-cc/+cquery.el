@@ -4,8 +4,7 @@
   :init
   (add-hook! (c-mode c++-mode) #'+my-cc/enable-lsp-or-irony)
   :config
-  (setq cquery-executable (expand-file-name "cquery/build/release/bin/cquery.exe" +my-devtools-path)
-  ))
+  (setq cquery-executable "c:/Users/xhcoding/Desktop/DevTools/cquery/build/release/bin/cquery.exe"))
 
 (after! projectile
   (setq projectile-project-root-files-top-down-recurring
