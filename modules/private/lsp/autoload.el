@@ -1,6 +1,6 @@
 ;;; private/my-cc/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autload
+;;;###autoload
 (defun +my-cc/enable-lsp()
   (if IS-WINDOWS
       (lsp-cquery-enable)
@@ -13,6 +13,6 @@
   (condition-case nil
       (+my-cc/enable-lsp)
     (user-error
-     (if (featurep! +irony)
+     (if (featurep! :lang cc +irony)
          (irony-mode +1)
        nil))))
