@@ -11,15 +11,11 @@
      :i "M-j" #'+my-cc/cc-jump-out-structure)))
 
 (def-package! cmake-project
-  :disabled t
   :load-path +my-ext-dir
   :config
-  (add-hook! (c-mode c++-mode) #'cp-load-all)
-  (setq cp-default-run-terminal-buffer "*doom eshell*")
   (map!
    (:mode (c-mode c++-mode)
-     :gnvime "<f7>" #'cp-cmake-build-project
-     :gnvime "<f8>" #'cp-cmake-run-project-with-args)))
+     :gnvime "<f7>" #'cp-project-build-project)))
 
 (after! realgud
   (setq realgud-safe-mode nil))
