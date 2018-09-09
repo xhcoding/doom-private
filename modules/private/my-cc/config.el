@@ -1,9 +1,5 @@
 ;;; private/my-cc/config.el -*- lexical-binding: t; -*-
 
-(if IS-WINDOWS
-    (load! "+cquery")
-  (load! "+ccls"))
-
 (def-package! google-c-style
   :config
   (add-hook! (c-mode c++-mode) #'google-set-c-style))
@@ -15,6 +11,7 @@
      :i "M-j" #'+my-cc/cc-jump-out-structure)))
 
 (def-package! cmake-project
+  :disabled t
   :load-path +my-ext-dir
   :config
   (add-hook! (c-mode c++-mode) #'cp-load-all)

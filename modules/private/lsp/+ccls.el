@@ -1,6 +1,5 @@
 ;;; private/my-cc/+ccls -*- lexical-binding: t; -*-
 
-
 (def-package! ccls
   :init
   (add-hook! (c-mode c++-mode) #'+my-cc/enable-lsp-or-irony)

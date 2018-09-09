@@ -32,3 +32,17 @@
    "j" #'lsp-ui-peek--select-next
    "k" #'lsp-ui-peek--select-prev
    "l" #'lsp-ui-peek--select-next-file))
+
+;; lsp client config
+
+(if IS-WINDOWS
+    (load! "+cquery")
+  (load! "+ccls"))
+
+(def-package! lsp-intellij
+  :config
+  (add-hook 'java-mode-hook #'lsp-intellij-enable))
+
+(def-package! lsp-python
+  :config
+  (add-hook 'python-mode-hook #'lsp-python-enable))

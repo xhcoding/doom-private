@@ -105,3 +105,8 @@
     '("clang-format"
       ("-assume-filename=%S" (or (buffer-file-name) ""))
       "-style=Google")))
+
+(after! ws-butler
+  (setq ws-butler-global-exempt-modes
+        (append ws-butler-global-exempt-modes
+                '(prog-mode))))

@@ -8,3 +8,14 @@
 
 (when (featurep! :completion company)
   (package! company-lsp))
+
+(when (featurep! :lang java)
+  (package! lsp-intellij))
+
+(when (featurep! :lang cc)
+  (if IS-WINDOWS
+      (package! cquery)
+    (package! ccls)))
+
+(when (featurep! :lang python)
+  (package! lsp-python))

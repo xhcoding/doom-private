@@ -1,5 +1,4 @@
 ;;; cmake-project --- Create and build c/c++ project with cmake
-
 ;; Filename: cmake-project.el
 ;; Description: Create and build c/c++ project with cmake
 ;; Author: Yong Cheng <xhcoding@163.com>
@@ -10,7 +9,6 @@
 ;; URL:
 ;; Keywords: cmake
 ;; Compatibility: GNU Emacs 26.1
-
 
 ;;; This file is NOT part of GNU Emacs
 
@@ -35,35 +33,46 @@
 
 ;;; Reuqire
 
+(require 'cl)
 (require 'dired)
-
 ;;; Code:
 ;;
 
 ;;; Custom
 (defgroup cmake-project nil
-  "Create and build c/c++ project with cmake."
+  "Manage c/c++ project with cmake."
   :group 'applications
   :prefix "cp-")
 
+(defcustom cp-project-root-files
+  '("CMakeLists.txt"    ;Cmake project file
+    )
+  "A list of files considered to mark the root of a cmake project."
+  :group 'cmake-project
+  :type '(repeat string))
 
-(defcustom cp-cmake-minimum-version nil
-  "CMake version."
+(defcustom cp-cmake-minimum-version "3.7"
+  "Required Cmake minimum version."
   :group 'cmake-project
   :type 'string)
 
-(defcustom cp-default-build-dir nil
-  "CMake project default build directory."
+(defcustom cp-cmake-build-type "Debug"
+  "Specifies the build type on single-configuration generators."
+  :group 'cmake-project
+  :type 'string
+  :options '("Debug" "Release" "RelWithDebInfo" "MinSizeRel"))
+
+
+(defcustom cp-project-build-directory "build"
+  "A path relative project root path, which CMake project default build."
   :group 'cmake-project
   :type 'string)
+
 
 ;;; Variable
 
-(defvar cp-root-dir nil
-  "CMake project root directory.")
-
-(defvar cp-project-name nil
-  "CMake project name.")
+(defvar cp-project-root-cache nil
+  "Cached value of function `cp-project-root'.")
 
 (defvar cp-build-dir "build"
   "CMake project build directory.")
@@ -88,162 +97,90 @@
 (defvar cp-default-open-terminal '+eshell/open-popup)
 
 ;;; Functions
-(defun cp--get-cmake-version()
-  "Get cmake installed version."
-  (let ((version-str (shell-command-to-string "cmake --version")))
-    (string-match "[1-9]\\.[0-9]\\{2\\}" version-str)
-    (match-string 0 version-str)))
-
-(defun cp--get-cmake-config-command ()
-  "Get cmake config command."
-  (format "cmake -B%s -H." cp-build-dir))
-
-(defun cp--get-cmake-build-command()
-  "Get cmake build command."
-  (format "cmake --build %s" cp-build-dir))
-
-(defun cp-insert-default-cmakelists-template (&optional version name)
-  "Insert a default `CMakeLists.txt' template.
-VERSION is require cmake minimum version.
-NAME is project name."
-  (let ((version (or version cp-cmake-minimum-version (cp--get-cmake-version)))
-        (name    (or name cp-project-name)))
-    (save-excursion
-      (insert (concat
-               (format "cmake_minimum_required(VERSION %s)" version)
-               (format "\nset(PROJECT_NAME \"%s\")" name)
-               (format "\nproject(${PROJECT_NAME})")
-               (format "\nset(CMAKE_EXPORT_COMPILE_COMMANDS ON)")
-               (format "\n\nadd_executable(main main.cpp)")
-               )))))
-
-(defun cp--init-path(root-dir)
-  "Initialize useful path with ROOT-DIR."
-  (setq cp-root-dir root-dir)
-  (setq cp-project-name (file-name-nondirectory cp-root-dir))
-  (setq cp-build-dir (or cp-build-dir cp-default-build-dir))
-  (setq cp-root-cmakelists-path (expand-file-name cp-root-cmakelists-path cp-root-dir)))
-
-(defun cp--create-symbol-link(src-dir tar-dir)
-  (message "%s %s" src-dir tar-dir)
-  (shell-command (format "ln -sf %s %s" src-dir tar-dir)))
-
-(defun cp--build-path()
-  (expand-file-name cp-build-dir cp-root-dir))
-
-(defun cp--compile-commands-path()
-  (expand-file-name cp-root-file (cp--build-path)))
-
-(defun cp--create-empty-compile-commands()
-  (with-temp-file (cp--compile-commands-path)))
-
-(defun cp-create-new-project(root-dir)
-  "Create a new CMake project at ROOT-DIR."
-  (interactive "DRoot Directory:")
-  (cp--init-path root-dir)
-  (dired-create-directory (expand-file-name cp-build-dir cp-root-dir))
-  (with-temp-file cp-root-cmakelists-path
-    (cp-insert-default-cmakelists-template))
-  (with-temp-file (expand-file-name "main.cpp" cp-root-dir)
-    (insert "int main() {}"))
-  (cp--create-empty-compile-commands)
-  (cp--create-symbol-link
-   (cp--compile-commands-path) (expand-file-name cp-root-file cp-root-dir))
-  (find-file cp-root-cmakelists-path)
-  (cp-cmake-config-project))
+(defun cp-parent(path)
+  "Return the parent directory of PATH.
+PATH may be a file or directory and directory paths end with a slash."
+  (directory-file-name (file-name-directory (directory-file-name (expand-file-name path)))))
 
 
+(defun cp-project-root(dir)
+  "Identify a project root in DIR by recurring top-down search for files in `cp-project-root-files'"
+  (if (and cp-project-root-cache (string-match (regexp-quote cp-project-root-cache) dir))
+      cp-project-root-cache
+    (setq cp-project-root-cache
+          (cl-some
+           (lambda(f)
+             (locate-dominating-file
+              dir
+              (lambda (dir)
+                (and (file-exists-p (expand-file-name f dir))
+                     (or (string-match locate-dominating-stop-dir-regexp (cp-parent dir))
+                         (not (file-exists-p (expand-file-name f (cp-parent dir)))))))))
+           cp-project-root-files))))
 
-(defun cp--get-cmake-cache(dir)
-  "Get `CMakeCache.txt'"
-  (let ((path (expand-file-name cp-cmake-cache-filename dir)))
-    (if (file-exists-p path)
-        path
-      nil)))
+;;;TODO: Improve
+(defun cp-project-gen-default-template()
+  "Generate a default `CMakeLists.txt' template"
+  (save-excursion
+    (concat
+     (format "cmake_minimum_required(VERSION %s)" cp-cmake-minimum-version)
+     (format "\nset(PROJECT_NAME \"%s\")" (file-name-nondirectory (directory-file-name cp-project-root-cache)))
+     (format "\nproject(${PROJECT_NAME})")
+     (format "\nset(CMAKE_EXPORT_COMPILE_COMMANDS ON)")
+     )))
 
-(defun cp--get-root-file(dir)
-  "Get `root-file'"
-  (let ((path (expand-file-name cp-root-file dir)))
-    (if (file-exists-p path)
-        path
-      nil)))
+;;;TODO: add cp-after-create-new-project-hook
+(defun cp-project-create-new-project(dir &optional template)
+  "Create a new project in DIR.
+TEMPLATE is a CMakeLists.txt template. IF it is `nil', use `cp-project-gen-default-template'
+instead.TEMPLATE can also be a function without argument and returning a string."
+  (interactive "DDirectory: ")
+  (setq cp-project-root-cache dir)
+  (dired-create-directory cp-project-root-cache)
+  (condition-case nil
+      (with-temp-file (expand-file-name "CMakeLists.txt"  cp-project-root-cache)
+        (let (template-string)
+          (setq template-string
+                (cond ((null template) (cp-project-gen-default-template))
+                      ((stringp template) template)
+                      ((functionp template) (template))))
+          (insert template-string)))
+    (error
+     (dired-delete-file cp-project-root-cache 'always)
+     (setq cp-project-root-cache nil)
+     (message "Create project failed!"))))
 
-(defun cp--parent-dir (dir)
-  "Return DIR's parent dir."
-  (file-name-directory (directory-file-name dir)))
+(defun cp-project-gen-project()
+  "Generate project."
+  (interactive)
+  (let ((default-directory cp-project-root-cache)
+        (compile-command))
+    (setq compile-command
+          (format "cmake -B%s -H." cp-project-build-directory))
+    (call-interactively 'compile)))
 
-(defun cp--in-project-dir(dir)
-  "DIR is in current project."
-  (if cp-root-dir
-      (string-match (regexp-quote cp-root-dir) dir)
-    nil))
+(defun cp-project-cleanup-gen()
+  "Clean up build directory."
+  (interactive)
+  (when (yes-or-no-p (format "Delete %s?" cp-project-build-directory))
+    (dired-delete-file cp-project-build-directory 'always)))
 
-(defun cp--get-root-dir(&optional dir)
-  "Get project root dir."
-  (let ((current-dir (or dir (file-name-directory (buffer-file-name))))
-        (i 0)
-        found
-        )
-    (if (cp--in-project-dir current-dir)
-        cp-root-dir
-      (progn
-        (while (and (< i 16) (not found) (not (string-equal "/" current-dir)))
-          (if (and (not (cp--get-cmake-cache current-dir))
-                   (cp--get-root-file current-dir))
-              (progn (setq cp-root-dir current-dir)
-                     (setq found t))
-            (setq current-dir (cp--parent-dir current-dir))
-            )
-          (setq i ( + i 1 ))
-          )
-        found))))
+(defun cp-project-build-project()
+  "Build project."
+  (interactive)
+  (let ((compile-command)
+        (default-directory cp-project-root-cache))
+        (setq compile-command
+          (format "cmake --build %s" cp-project-build-directory))
+    (call-interactively 'compile)))
 
+;;TODO: run project
 
-(defun cp-load-all()
+(defun cp-project-refresh()
   (interactive)
   (condition-case nil
-      (cp--get-root-dir)
-    (error nil)))
-
-
-(defun cp-cmake-config-project()
-  (interactive)
-  (let ((compile-command (cp--get-cmake-config-command))
-        (default-directory cp-root-dir))
-    (call-interactively 'compile)))
-
-(defun cp-cmake-build-project()
-  (interactive)
-  (let ((compile-command (cp--get-cmake-build-command))
-        (default-directory cp-root-dir))
-    (call-interactively 'compile)))
-
-
-(defun cp--read-run-args(binary-dir &optional args)
-  (list (let ((default-directory binary-dir))
-          (find-file-read-args "Run file: " t))
-        (if args
-            (read-string "Args: "))))
-
-(defun cp--binary-path()
-  (expand-file-name cp-binary-dir cp-root-dir))
-
-;;FIXME: fix first start eshell
-(defun cp-cmake-run-project-with-args(file args)
-  (interactive (cp--read-run-args (cp--binary-path) t))
-  (unless (buffer-live-p cp-default-run-terminal-buffer)
-    (funcall cp-default-open-terminal (get-buffer-window)))
-  (with-current-buffer cp-default-run-terminal-buffer
-    (let ((window (get-buffer-window)))
-      (unless window
-        (set-window-buffer (split-window-right) (current-buffer))
-        ))
-    (eshell-return-to-prompt)
-    (insert (format "%s %s" file args))
-    (eshell-send-input)
-    ))
-
-
+      (cp-project-root default-directory)
+    (error (message "project refresh failed"))))
 
 (provide 'cmake-project)
 
