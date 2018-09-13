@@ -10,6 +10,9 @@
 ;; remove doom advice, I don't need deal with comments when newline
 (advice-remove #'newline-and-indent #'doom*newline-and-indent)
 
+(after! evil
+  (setq evil-want-integration t))
+
 ;; Reconfigure packages
 (after! evil-escape
   (setq evil-escape-key-sequence "jk"))
@@ -32,8 +35,9 @@
   :load-path +my-ext-dir
   :init
   ;; 自动保存计时器
-  (defvar +my-auto-save-timer nil)
+  (defvar +my-auto-save-timer t)
   :config
+  (auto-save-enable)
   (setq auto-save-slient t))
 
 (def-package! visual-regexp
@@ -89,7 +93,7 @@
     ("^\\*info\\*$" :size 0.6)
     ("^\\*.*Octave\\*$" :size 0.5 :side right)
     ("^\\*Python*\\*$" :size 0.5 :side right)
-    ("^\\*\\(?:term\\|eshell\\)" :size 0.5 :side right)))
+    ("^\\*doom \\(?:term\\|eshell\\)" :size 0.5 :side right)))
 
 (set-lookup-handlers! 'emacs-lisp-mode :documentation #'helpful-at-point)
 
@@ -97,14 +101,16 @@
 
 (after! format
   (set-formatter!
-    '((c-mode ".c")
-      (c++-mode ".cpp")
-      (java-mode ".java")
-      (objc-mode ".m")
-      )
+    'clang-format
     '("clang-format"
       ("-assume-filename=%S" (or (buffer-file-name) ""))
-      "-style=Google")))
+      "-style=Google"))
+  :modes
+  '((c-mode ".c")
+    (c++-mode ".cpp")
+    (java-mode ".java")
+    (objc-mode ".m")
+    ))
 
 (after! ws-butler
   (setq ws-butler-global-exempt-modes

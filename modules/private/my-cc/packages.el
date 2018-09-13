@@ -8,4 +8,4 @@
 
 (package! google-c-style)
 
-(package! cmake-project :ignore t)
+(package! cmake-project :recipe (:fetcher github :repo "xhcoding/cmake-project"))

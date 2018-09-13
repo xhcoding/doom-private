@@ -66,6 +66,3 @@ Visual Studio是一个IDE，安装它的目的是编译及调试程序。你也�
 * 效果展示
 [[img/linux.gif]]
 * TODO 待完成
-- [ ] 完善文档
-- [ ] 录制一个更完善的效果图
-- [ ] 改进cmake-project.el
