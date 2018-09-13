@@ -170,11 +170,23 @@ instead.TEMPLATE can also be a function without argument and returning a string.
   (interactive)
   (let ((compile-command)
         (default-directory cp-project-root-cache))
-        (setq compile-command
+    (setq compile-command
           (format "cmake --build %s" cp-project-build-directory))
     (call-interactively 'compile)))
 
-;;TODO: run project
+;;TODO: imporve run project
+(defun cp-project-run(file &optional args)
+  (interactive
+   (list
+    (let ((default-directory (or cp-project-root-cache default-directory)))
+      (car (find-file-read-args "File: " t)))
+    (read-from-minibuffer "Args: ")))
+  (with-current-buffer (or (get-buffer eshell-buffer-name) (eshell))
+    ;; eshell-return-to-prompt has beginning of buffer error
+    (eshell-return-to-prompt)
+    (insert (format "%s %s" file args))
+    (eshell-send-input)))
+
 
 (defun cp-project-refresh()
   (interactive)

@@ -6,7 +6,7 @@
   (interactive)
   (end-of-line)
   (delete-trailing-whitespace)
-  (when (not (equal (char-before) 59))
+  (unless (equal (char-before) 59)
     (insert ";"))
   (newline-and-indent))
 

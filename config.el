@@ -89,7 +89,7 @@
     ("^\\*info\\*$" :size 0.6)
     ("^\\*.*Octave\\*$" :size 0.5 :side right)
     ("^\\*Python*\\*$" :size 0.5 :side right)
-    ("^\\*doom \\(?:term\\|eshell\\)" :size 0.5 :side right)))
+    ("^\\*\\(?:term\\|eshell\\)" :size 0.5 :side right)))
 
 (set-lookup-handlers! 'emacs-lisp-mode :documentation #'helpful-at-point)
 

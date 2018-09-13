@@ -12,8 +12,7 @@
         (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
 		                    charset
-		                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 20)))) ;; 14 16 20 22 28
-    ))
+		                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 20)))))) ;; 14 16 20 22 28
 
 ;;;###autoload
 (defun +my/toggle-cycle-theme ()

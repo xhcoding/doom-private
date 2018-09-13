@@ -1,11 +1,12 @@
 ;;; config/private/+ui.el -*- lexical-binding: t; -*-
 
 ;; theme
+;; cycle by +my/toggle-cycle-theme, binding SPC t t
 (defvar +my-themes '(doom-one doom-one-light doom-dracula))
 
 
-;; disabled display line number
-(remove-hook! (prog-mode text-mode conf-mode) #'display-line-numbers-mode)
+;; disable line-number
+(setq display-line-numbers-type nil)
 
 ;; font
 (defun +my|init-font(frame)

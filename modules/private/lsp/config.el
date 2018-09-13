@@ -40,6 +40,7 @@
   (load! "+ccls"))
 
 (def-package! lsp-intellij
+  :disabled t
   :config
   (add-hook 'java-mode-hook #'lsp-intellij-enable))
 

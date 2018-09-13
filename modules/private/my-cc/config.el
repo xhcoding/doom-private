@@ -11,6 +11,7 @@
      :i "M-j" #'+my-cc/cc-jump-out-structure)))
 
 (def-package! cmake-project
+  :after cc-mode
   :load-path +my-ext-dir
   :config
   (map!
