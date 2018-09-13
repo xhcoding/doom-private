@@ -68,6 +68,10 @@
   :group 'cmake-project
   :type 'string)
 
+(defcustom cp-project-template-function 'cp-project-gen-default-template
+  "A function generated `CMakeLists.txt' template."
+  :group 'cmake-project
+  :type 'function)
 
 ;;; Variable
 
@@ -130,7 +134,7 @@ PATH may be a file or directory and directory paths end with a slash."
      )))
 
 ;;;TODO: add cp-after-create-new-project-hook
-(defun cp-project-create-new-project(dir &optional template)
+(defun cp-project-create-new-project(dir)
   "Create a new project in DIR.
 TEMPLATE is a CMakeLists.txt template. IF it is `nil', use `cp-project-gen-default-template'
 instead.TEMPLATE can also be a function without argument and returning a string."
@@ -138,13 +142,11 @@ instead.TEMPLATE can also be a function without argument and returning a string.
   (setq cp-project-root-cache dir)
   (dired-create-directory cp-project-root-cache)
   (condition-case nil
-      (with-temp-file (expand-file-name "CMakeLists.txt"  cp-project-root-cache)
-        (let (template-string)
-          (setq template-string
-                (cond ((null template) (cp-project-gen-default-template))
-                      ((stringp template) template)
-                      ((functionp template) (template))))
-          (insert template-string)))
+      (progn
+        (let ((file (expand-file-name "CMakeLists.txt"  cp-project-root-cache)))
+          (with-temp-file  file
+            (insert (funcall cp-project-template-function)))
+          (find-file file)))
     (error
      (dired-delete-file cp-project-root-cache 'always)
      (setq cp-project-root-cache nil)
