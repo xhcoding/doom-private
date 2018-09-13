@@ -78,27 +78,6 @@
 (defvar cp-project-root-cache nil
   "Cached value of function `cp-project-root'.")
 
-(defvar cp-build-dir "build"
-  "CMake project build directory.")
-
-(defvar cp-binary-dir "build/bin")
-
-(defvar cp-root-cmakelists-path "CMakeLists.txt"
-  "`CMakeLists.txt' path.")
-
-(defvar cp-cmake-config-command "cmake -Bbuild -H."
-  "Default cmake command.")
-
-(defvar cp-cmake-cache-filename "CMakeCache.txt"
-  "CMake cache filename.")
-
-(defvar cp-root-file "compile_commands.json"
-  "CMake compile commands filename.")
-
-(defvar cp-default-run-terminal-buffer "eshell"
-  "Run in terminal buffer.")
-
-(defvar cp-default-open-terminal '+eshell/open-popup)
 
 ;;; Functions
 (defun cp-parent(path)
