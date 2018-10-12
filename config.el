@@ -95,6 +95,7 @@
     ("^\\*Python*\\*$" :size 0.5 :side right)
     ("^\\*doom \\(?:term\\|eshell\\)" :size 0.5 :side right)))
 
+
 (set-lookup-handlers! 'emacs-lisp-mode :documentation #'helpful-at-point)
 
 (set-company-backend! '(yaml-mode cmake-mode) 'company-dabbrev)
@@ -115,4 +116,10 @@
 (after! ws-butler
   (setq ws-butler-global-exempt-modes
         (append ws-butler-global-exempt-modes
-                '(prog-mode))))
+                '(prog-mode org-mode))))
+
+(def-package! awesome-tray
+  :disabled t
+  :config
+  (awesome-tray-mode +1))
+

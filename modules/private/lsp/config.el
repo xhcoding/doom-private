@@ -47,3 +47,7 @@
 (def-package! lsp-python
   :config
   (add-hook 'python-mode-hook #'lsp-python-enable))
+
+(def-package! lsp-javascript-typescript
+  :config
+  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable))

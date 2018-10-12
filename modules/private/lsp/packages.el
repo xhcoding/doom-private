@@ -19,3 +19,5 @@
 
 (when (featurep! :lang python)
   (package! lsp-python))
+
+(package! lsp-javascript-typescript)

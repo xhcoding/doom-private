@@ -14,6 +14,8 @@
 (setq user-full-name "xhcoding"
       user-mail-address "xhcoding@163.com")
 
+(add-hook 'doom-init-hook #'(lambda()
+                              (setq evil-want-keybinding nil)))
 
 (doom!
  :feature
@@ -66,6 +68,7 @@
  magit
 
  :lang
+ assembly          ; assembly for fun or debugging
  (cc               ; C/C++/Obj-C madness
   +irony)
  data              ; config/data formats
@@ -85,7 +88,6 @@
  python            ; beautiful is better than ugly
 
  :app
-
  :collab
 
  :config
@@ -93,10 +95,11 @@
  ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
  ;; and additional ex commands for evil-mode. Use it as a reference for
  ;; your own modules.
- (default +bindings +snippets +evil-commands)
+ (default +bindings +evil-commands)
 
  :private
  lsp
  my-cc
  my-blog
+;; my-email
  )

@@ -168,3 +168,6 @@
       (t
        (user-error "Your 3rd argument %s is invalid" to-direction))))
     (buffer-string)))
+
+;;;autoload
+(add-to-list 'auto-mode-alist '("\\.nas\\'" . nasm-mode))
