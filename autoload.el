@@ -78,8 +78,10 @@
   (if +my-auto-save-timer
       (progn
         (cancel-timer +my-auto-save-timer)
-        (setq +my-auto-save-timer nil))
-    (setq +my-auto-save-timer (auto-save-enable))))
+        (setq +my-auto-save-timer nil)
+        (message "auto save disabled."))
+    (progn (setq +my-auto-save-timer (auto-save-enable))
+           (message "auto save enabled."))))
 
 ;;;###autoload
 (defun +my/rename-this-file-and-buffer (new-name)
@@ -169,5 +171,5 @@
        (user-error "Your 3rd argument %s is invalid" to-direction))))
     (buffer-string)))
 
-;;;autoload
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.nas\\'" . nasm-mode))

@@ -8,9 +8,11 @@
 
 (def-package! company-lsp
   :after lsp-mode
-  :config
-  (set-company-backend! 'lsp-mode 'company-lsp))
-
+  :init
+  (setq company-transformers nil company-lsp-cache-candidates nil)
+  :config 
+  (set-company-backend! 'lsp-mode 'company-lsp)
+  )
 (def-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config
@@ -38,6 +40,7 @@
 (if IS-WINDOWS
     (load! "+cquery")
   (load! "+ccls"))
+
 
 (def-package! lsp-intellij
   :disabled t

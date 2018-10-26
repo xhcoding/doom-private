@@ -16,3 +16,10 @@
      (if (featurep! :lang cc +irony)
          (irony-mode +1)
        nil))))
+
+
+;;;###autoload
+(defvar +ccls-path-mappings [])
+
+;;;###autoload
+(defvar +ccls-initial-blacklist [])

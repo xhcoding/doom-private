@@ -4,11 +4,6 @@
   :config
   (add-hook! (c-mode c++-mode) #'google-set-c-style))
 
-(after! cc-mode
-  (map!
-   (:map c-mode-base-map
-     :i "C-j" #'+my-cc/cc-newline
-     :i "M-j" #'+my-cc/cc-jump-out-structure)))
 
 (def-package! cmake-project
   :after cc-mode
