@@ -10,7 +10,7 @@
   :after lsp-mode
   :init
   (setq company-transformers nil company-lsp-cache-candidates nil)
-  :config 
+  :config
   (set-company-backend! 'lsp-mode 'company-lsp)
   )
 (def-package! lsp-ui
@@ -43,14 +43,12 @@
 
 
 (def-package! lsp-intellij
-  :disabled t
   :config
-  (add-hook 'java-mode-hook #'lsp-intellij-enable))
+)
 
 (def-package! lsp-python
   :config
   (add-hook 'python-mode-hook #'lsp-python-enable))
 
 (def-package! lsp-javascript-typescript
-  :config
-  (add-hook 'js-mode-hook #'lsp-javascript-typescript-enable))
+  )

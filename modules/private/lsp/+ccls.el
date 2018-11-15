@@ -23,7 +23,6 @@
             :index (:initialBlacklist ,+ccls-initial-blacklist :trackDependency 1)))
 
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
-
   )
 
 (after! projectile
