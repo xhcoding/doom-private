@@ -1,13 +1,10 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; config/private/packages.el
 
-(disable-packages! anaconda-mode)
-
 (package! visual-regexp)
 (package! visual-regexp-steroids)
 (package! company-posframe)
 (package! org-edit-latex)
-(package! pyim)
 
 
 (package! isolate :recipe (:fetcher github :repo "casouri/isolate"))

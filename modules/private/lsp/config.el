@@ -40,15 +40,3 @@
 (if IS-WINDOWS
     (load! "+cquery")
   (load! "+ccls"))
-
-
-(def-package! lsp-intellij
-  :config
-)
-
-(def-package! lsp-python
-  :config
-  (add-hook 'python-mode-hook #'lsp-python-enable))
-
-(def-package! lsp-javascript-typescript
-  )

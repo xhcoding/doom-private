@@ -73,7 +73,6 @@
   +irony)
  data              ; config/data formats
  emacs-lisp        ; drown in parentheses
- java              ; the poster child for carpal tunnel syndrome
  (latex            ; writing papers in Emacs has never been so fun
   +okular
   )
