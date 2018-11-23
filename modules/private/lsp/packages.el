@@ -13,3 +13,5 @@
   (if IS-WINDOWS
       (package! cquery)
     (package! ccls)))
+
+(package! ms-python :ignore t)

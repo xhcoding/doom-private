@@ -9,10 +9,11 @@
 (def-package! company-lsp
   :after lsp-mode
   :init
-  (setq company-transformers nil company-lsp-cache-candidates nil)
+  (setq company-transformers nil)
   :config
   (set-company-backend! 'lsp-mode 'company-lsp)
   )
+
 (def-package! lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :config
@@ -21,8 +22,7 @@
     :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 50
-        lsp-ui-sideline-ignore-duplicate t
-        lsp-ui-sideline-enable t
+        lsp-ui-sideline-ignore-duplicate t lsp-ui-sideline-enable t
         lsp-ui-sideline-show-symbol nil
         lsp-ui-sideline-show-hover nil
         lsp-ui-sideline-show-flycheck nil
@@ -40,3 +40,13 @@
 (if IS-WINDOWS
     (load! "+cquery")
   (load! "+ccls"))
+
+
+;; ms-python
+(def-package! ms-python
+  :load-path +my-ext-dir
+  :init
+  (add-hook 'python-mode-hook #'+my-python/enable-lsp)
+  :config
+  (setq ms-python-dir "/home/xhcoding/Code/CCPro/python-language-server/output/bin/Release/")
+  )

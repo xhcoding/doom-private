@@ -23,3 +23,11 @@
 
 ;;;###autoload
 (defvar +ccls-initial-blacklist [])
+
+;;;###autoload
+(defun +my-python/enable-lsp()
+  (unless pyvenv-virtual-env-name
+    (pyvenv-activate "/home/xhcoding/Code/Python/.venv"))
+  (lsp-python-enable)
+  (setq-local flycheck-checker 'python-pylint)
+  )

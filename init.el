@@ -84,8 +84,9 @@
   +present         ; Emacs for presentations
   )
  plantuml          ; diagrams for confusing people more
- python            ; beautiful is better than ugly
-
+ (python            ; beautiful is better than ugly
+  +pyvenv
+  )
  :app
  :collab
 
