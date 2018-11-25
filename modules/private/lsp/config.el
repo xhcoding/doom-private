@@ -44,7 +44,6 @@
 
 ;; ms-python
 (def-package! ms-python
-  :load-path +my-ext-dir
   :init
   (add-hook 'python-mode-hook #'+my-python/enable-lsp)
   :config

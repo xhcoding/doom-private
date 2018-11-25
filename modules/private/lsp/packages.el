@@ -14,4 +14,4 @@
       (package! cquery)
     (package! ccls)))
 
-(package! ms-python :ignore t)
+(package! ms-python :recipe (:fetcher github :repo "xhcoding/ms-python"))

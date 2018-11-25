@@ -28,6 +28,6 @@
 (defun +my-python/enable-lsp()
   (unless pyvenv-virtual-env-name
     (pyvenv-activate "/home/xhcoding/Code/Python/.venv"))
-  (lsp-python-enable)
+  (lsp-ms-python-enable)
   (setq-local flycheck-checker 'python-pylint)
   )
