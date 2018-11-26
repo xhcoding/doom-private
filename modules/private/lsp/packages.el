@@ -14,4 +14,6 @@
       (package! cquery)
     (package! ccls)))
 
-(package! ms-python :recipe (:fetcher github :repo "xhcoding/ms-python"))
+(when (featurep! :lang python)
+  (package! ms-python :recipe (:fetcher github :repo "xhcoding/ms-python")))
+

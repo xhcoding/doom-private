@@ -21,7 +21,7 @@
     :definition #'lsp-ui-peek-find-definitions
     :references #'lsp-ui-peek-find-references)
   (setq lsp-ui-doc-max-height 20
-        lsp-ui-doc-max-width 50
+        lsp-ui-doc-max-width 40
         lsp-ui-sideline-ignore-duplicate t lsp-ui-sideline-enable t
         lsp-ui-sideline-show-symbol nil
         lsp-ui-sideline-show-hover nil
@@ -47,5 +47,5 @@
   :init
   (add-hook 'python-mode-hook #'+my-python/enable-lsp)
   :config
-  (setq ms-python-dir "/home/xhcoding/Code/CCPro/python-language-server/output/bin/Release/")
+  (setq ms-python-dir "/home/xhcoding/Code/Python/python-language-server/output/bin/Release/")
   )
