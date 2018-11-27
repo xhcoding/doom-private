@@ -7,7 +7,8 @@
 (package! visual-regexp-steroids)
 (package! company-posframe)
 (package! org-edit-latex)
-(package! slime)
+(package! pyim)
+
 
 (package! isolate :recipe (:fetcher github :repo "casouri/isolate"))
 (package! color-rg :recipe (:fetcher github :repo "manateelazycat/color-rg"))
@@ -16,3 +17,4 @@
 (package! auto-save :ignore t)
 (package! scroll-other-window :ignore t)
 (package! openwith :ignore t)
+

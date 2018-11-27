@@ -1,3 +1,4 @@
+* TODO 完善文档
 * 安装
 ** Linux
 *** 前置软件
@@ -63,6 +64,11 @@ Visual Studio是一个IDE，安装它的目的是编译及调试程序。你也�
 在系统的 =PATH= 环境变量里，这样在任何终端(cmd powershell等)都能直接运行程序。由于
 我不用系统的那些终端，所以这里使用的方法是在Emacs内部把路径加在 =PATH= 里，如果你
 更改了DevTools下程序的位置，请修改[[https://github.com/xhcoding/doom-private/blob/master/%2Bpath.el][+path.el]]里的内容
+* 用法
+打开一个CMake 项目后先运行 M-x cp-project-refresh
+- 新建项目：M-x cp-project-create-new-project
+- 生成CMake 配置文件：M-x cp-project-gen-project
+- 构建项目：cp-project-build-project
+- 运行项目：cp-project-run
 * 效果展示
 [[img/linux.gif]]
-* TODO 待完成
