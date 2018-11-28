@@ -4,10 +4,9 @@
   :config
   (add-hook! (c-mode c++-mode) #'google-set-c-style))
 
-
 (def-package! cmake-project
   :after cc-mode
-  :commands (cp-project-refresh cp-project-create-new-project)
+  :commands (cp-project-refresh cp-project-new)
   :config
   (defun +my-cc-gen-template()
     (concat
@@ -29,10 +28,10 @@
            (format "echo \"\nint main() {\n  return 0;\n}\" > main.cpp && ")
            (format "touch %s/compile_commands.json && " cp-project-build-directory)
            (format "ln -sf %s/compile_commands.json compile_commands.json" cp-project-build-directory)))
-         (cp-project-gen-project))))
+         (cp-project-gen))))
   (map!
    (:mode (c-mode c++-mode)
-     :gnvime "<f7>" #'cp-project-build-project
+     :gnvime "<f7>" #'cp-project-build
      :gnvime "<f8>" #'cp-project-run)))
 
 (after! realgud

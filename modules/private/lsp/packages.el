@@ -10,10 +10,7 @@
   (package! company-lsp))
 
 (when (featurep! :lang cc)
-  (if IS-WINDOWS
-      (package! cquery)
-    (package! ccls)))
+  (package! ccls))
 
 (when (featurep! :lang python)
   (package! ms-python :recipe (:fetcher github :repo "xhcoding/ms-python")))
-

@@ -4,9 +4,6 @@
 (load! "+ui")
 (load! "+org")
 
-(when IS-WINDOWS
-  (load! "+path"))
-
 ;; remove doom advice, I don't need deal with comments when newline
 (advice-remove #'newline-and-indent #'doom*newline-and-indent)
 

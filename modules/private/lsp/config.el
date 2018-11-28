@@ -37,9 +37,7 @@
 
 ;; lsp client config
 
-(if IS-WINDOWS
-    (load! "+cquery")
-  (load! "+ccls"))
+(load! "+ccls")
 
 
 ;; ms-python

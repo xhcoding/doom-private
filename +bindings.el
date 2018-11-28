@@ -1,7 +1,6 @@
 ;;; config/private/+bindings.el -*- lexical-binding: t; -*-
 (map! [remap indent-region] #'+my/indent-or-format
 
-
       :gnvime "M-g s"     #'sp-up-sexp
       :gnvime "M-g S"     #'sp-backward-sexp
       :gnvime "M-g k"     #'+my/kill-in-pair
