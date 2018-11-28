@@ -18,13 +18,6 @@
       (concat  +my-blog-res-url (string-trim-left filename +my-blog-img-dir))
     nil))
 
-;; sync images
-(defun +my-blog/sync-blog-img-to-qiniu()
-  (interactive)
-  (call-process-shell-command
-   "/home/xhcoding/Tools/qshell-lastest/qshell qupload /home/xhcoding/Tools/qshell-lastest/upload_config.json"))
-
-
 
 ;;;###autoload
 (defun +my-blog-kill-new-img-link(prefix imagename)

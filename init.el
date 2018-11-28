@@ -5,17 +5,8 @@
                          ("melpa" . "http://elpa.emacs-china.org/melpa/")
 			             ("org"   . "http://elpa.emacs-china.org/org/")))
 
-;; 一些目录
-(defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
-(defvar +my-yas-snipper-dir (expand-file-name "~/.config/doom/snippets"))
-(defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
-
-
-(setq user-full-name "xhcoding"
-      user-mail-address "xhcoding@163.com")
-
-(add-hook 'doom-init-hook #'(lambda()
-                              (setq evil-want-keybinding nil)))
+;; 载入与个人非常相关的配置
+(load! "+self.el")
 
 (doom!
  :feature
