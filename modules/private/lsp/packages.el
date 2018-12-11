@@ -14,3 +14,6 @@
 
 (when (featurep! :lang python)
   (package! ms-python :recipe (:fetcher github :repo "xhcoding/ms-python")))
+
+(package! lsp-java)
+(package! dap-mode)

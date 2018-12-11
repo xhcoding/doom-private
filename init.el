@@ -13,14 +13,17 @@
  debugger
  eval              ; run code, run (also, repls)
  (evil +everywhere); come to the dark side, we have cookies
+ (lookup           ; helps you navigate your code and documentation
+  +docsets)        ; ...or in Dash docsets locally
  snippets          ; my elves. They type so I don't have to
- lookup
  (syntax-checker   ; tasing you for every semicolon you forget
-  +childframe)     ; use childframes for (error "" &optional ARGS) popups (Emacs 26+ only)
+  +childframe
+  )
  workspaces        ; tab emulation, persistence & separate workspaces
 
  :completion
  (company           ; the ultimate code completion backend
+  +childframe
   +auto
   )
  (ivy               ; a search engine for love and life
@@ -60,8 +63,7 @@
 
  :lang
  assembly          ; assembly for fun or debugging
- (cc               ; C/C++/Obj-C madness
-  +irony)
+ cc               ; C/C++/Obj-C madness
  data              ; config/data formats
  emacs-lisp        ; drown in parentheses
  (latex            ; writing papers in Emacs has never been so fun
@@ -78,6 +80,7 @@
  (python            ; beautiful is better than ugly
   +pyvenv
   )
+ web               ; the tubes
  :app
  :collab
 

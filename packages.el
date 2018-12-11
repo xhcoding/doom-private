@@ -5,9 +5,9 @@
 
 (package! visual-regexp)
 (package! visual-regexp-steroids)
-(package! company-posframe)
 (package! org-edit-latex)
 (package! pyim)
+(package! package-lint)
 
 
 (package! isolate :recipe (:fetcher github :repo "casouri/isolate"))

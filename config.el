@@ -29,12 +29,13 @@
         "M-d" #'company-next-page
         "M-u" #'company-previous-page))
 
+(def-package! package-lint
+  :commands (package-lint-current-buffer))
+
 (def-package! auto-save
   :load-path +my-ext-dir
-  :init
-  ;; 自动保存计时器
   :config
-  (setq +my-auto-save-timer (auto-save-enable))
+  ;; (setq +my-auto-save-timer (auto-save-enable))
   (setq auto-save-slient t))
 
 (def-package! visual-regexp
@@ -47,11 +48,6 @@
 
 (def-package! company-english-helper
   :commands (toggle-company-english-helper))
-
-(def-package! company-posframe
-  :if (display-graphic-p)
-  :after company
-  :hook (company-mode . company-posframe-mode))
 
 
 (def-package! scroll-other-window
@@ -74,16 +70,6 @@
           ("\\.xlsx?\\'" "et" (file))))
   (add-hook! :append 'emacs-startup-hook #'openwith-mode))
 
-(def-package! isolate
-  :config
-  (add-to-list 'isolate-pair-list
-               '(
-                 (from . "os-\\(.*\\)=")
-                 (to-left . (lambda(from)
-                              (format "#+BEGIN_SRC %s\n" (match-string 1 from))))
-                 (to-right . "\n#+END_SRC\n")
-                 (condition . (lambda (_) (equal major-mode 'org-mode)))
-                 )))
 
 (set-popup-rules!
   '(("^\\*helpful" :size 0.6)
@@ -115,10 +101,6 @@
         (append ws-butler-global-exempt-modes
                 '(prog-mode org-mode))))
 
-(def-package! awesome-tray
-  :disabled t
-  :config
-  (awesome-tray-mode +1))
 
 (after! tex
   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
@@ -127,7 +109,7 @@
 
 
 (def-package! pyim
-  :demand t
+  :defer 2
   :config
   (setq pyim-dcache-directory (expand-file-name "pyim" doom-cache-dir))
   (setq pyim-dicts
@@ -145,7 +127,8 @@
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
   (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-dynamic-english
+                '(
+                  ;;pyim-probe-dynamic-english
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template))
@@ -166,5 +149,5 @@
   (setq pyim-page-length 5)
 
   :bind
-  (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
+  (("M-l" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-;" . pyim-delete-word-from-personal-buffer)))
