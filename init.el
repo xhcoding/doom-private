@@ -13,8 +13,7 @@
  debugger
  eval              ; run code, run (also, repls)
  (evil +everywhere); come to the dark side, we have cookies
- (lookup           ; helps you navigate your code and documentation
-  +docsets)        ; ...or in Dash docsets locally
+ lookup           ; helps you navigate your code and documentation
  snippets          ; my elves. They type so I don't have to
  (syntax-checker   ; tasing you for every semicolon you forget
   +childframe
@@ -43,8 +42,8 @@
 
  treemacs          ; a project drawer, like neotree but cooler
  (popup            ; tame sudden yet inevitable temporary windows
-  +all             ; catch all popups that start with an asterix
-  +defaults)       ; default popup rules
+  +all
+  +defaults)
 
  :editor
  format            ; automated prettiness
@@ -53,7 +52,7 @@
  :emacs
  dired             ; making dired pretty [functional]
  ediff             ; comparing files in Emacs
- eshell            ; a consistent, cross-platform shell (WIP)
+ ;; eshell            ; a consistent, cross-platform shell (WIP)
  hideshow          ; basic code-folding support
  imenu             ; an imenu sidebar and searchable code index
  vc                ; version-control and Emacs, sitting in a tree
@@ -67,7 +66,6 @@
  data              ; config/data formats
  emacs-lisp        ; drown in parentheses
  (latex            ; writing papers in Emacs has never been so fun
-  +okular
   )
  (org              ; organize your plain life in plain text
   +attach          ; custom attachment system
@@ -76,12 +74,15 @@
   +export          ; Exporting org to whatever you want
   +present         ; Emacs for presentations
   )
+ javascript        ; all(hope(abandon(ye(who(enter(here))))))
  plantuml          ; diagrams for confusing people more
  (python            ; beautiful is better than ugly
   +pyvenv
   )
  web               ; the tubes
+
  :app
+
  :collab
 
  :config

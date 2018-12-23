@@ -6,6 +6,7 @@
   :commands (lsp-register-client)
   :config
   (setq lsp-auto-guess-root t
+        lsp-prefer-flymake nil
         lsp-session-file (expand-file-name ".lsp-session" doom-etc-dir)
         lsp-project-blacklist '("^/usr/")
         lsp-highlight-symbol-at-point nil))
@@ -40,6 +41,7 @@
 (def-package! dap-mode
   :after lsp-mode
   :config
+  (setq dap--breakpoints-file (expand-file-name ".dap-breakpoints" doom-etc-dir))
   (dap-mode +1)
   (dap-ui-mode +1))
 

@@ -8,3 +8,10 @@
   (lsp)
   (setq-local flycheck-checker 'python-pylint)
   )
+
+;;;###autoload
+(defun +my-python/restart-lsp-without-pyvenv()
+  (interactive)
+  (when pyvenv-virtual-env-name
+    (pyvenv-deactivate)
+    (lsp-restart-workspace)))

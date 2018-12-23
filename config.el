@@ -18,7 +18,7 @@
   (setq projectile-require-project-root t))
 
 (after! company
-  (setq company-minimum-prefix-length 1
+  (setq company-minimum-prefix-length 2
         company-idle-delay 0
         company-tooltip-limit 10
         company-show-numbers t
@@ -35,7 +35,7 @@
 (def-package! auto-save
   :load-path +my-ext-dir
   :config
-  ;; (setq +my-auto-save-timer (auto-save-enable))
+  (setq +my-auto-save-timer nil)
   (setq auto-save-slient t))
 
 (def-package! visual-regexp
@@ -71,14 +71,6 @@
   (add-hook! :append 'emacs-startup-hook #'openwith-mode))
 
 
-(set-popup-rules!
-  '(("^\\*helpful" :size 0.6)
-    ("^\\*info\\*$" :size 0.6)
-    ("^\\*.*Octave\\*$" :size 0.5 :side right)
-    ("^\\*Python*\\*$" :size 0.5 :side right)
-    ("^\\*doom \\(?:term\\|eshell\\)" :size 0.5 :side right)))
-
-
 (set-lookup-handlers! 'emacs-lisp-mode :documentation #'helpful-at-point)
 
 (set-company-backend! '(yaml-mode cmake-mode) 'company-dabbrev)
@@ -105,16 +97,20 @@
 (after! tex
   (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
   (setq-hook! LaTeX-mode TeX-command-default "XeLaTex")
-  (setq TeX-save-query nil))
 
+  (setq TeX-save-query nil)
+  (when (fboundp 'eaf-open)
+    (add-to-list 'TeX-view-program-list '("eaf" TeX-eaf-sync-view))
+    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
+  )
 
 (def-package! pyim
   :defer 2
   :config
   (setq pyim-dcache-directory (expand-file-name "pyim" doom-cache-dir))
   (setq pyim-dicts
-      '((:name "bigdict" :file "~/Tools/pyim-dict/pyim-bigdict.pyim")
-        (:name "computer" :file "~/Tools/pyim-dict/pyim-computer.pyim")))
+        '((:name "bigdict" :file "~/Tools/pyim-dict/pyim-bigdict.pyim")
+          (:name "computer" :file "~/Tools/pyim-dict/pyim-computer.pyim")))
 
   (setq default-input-method "pyim")
 
@@ -126,19 +122,19 @@
   ;; 1. 光标只有在注释里面时，才可以输入中文。
   ;; 2. 光标前是汉字字符时，才能输入中文。
   ;; 3. 使用 M-j 快捷键，强制将光标前的拼音字符串转换为中文。
-  (setq-default pyim-english-input-switch-functions
-                '(
-                  ;;pyim-probe-dynamic-english
-                  pyim-probe-isearch-mode
-                  pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
+  ;; (setq-default pyim-english-input-switch-functions
+  ;;               '(
+  ;;                 pyim-probe-dynamic-english
+  ;;                 pyim-probe-isearch-mode
+  ;;                 pyim-probe-program-mode
+  ;;                 pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+  ;; (setq-default pyim-punctuation-half-width-functions
+  ;;               '(pyim-probe-punctuation-line-beginning
+  ;;                 pyim-probe-punctuation-after-punctuation))
 
   ;; 开启拼音搜索功能
-  (pyim-isearch-mode 1)
+  ;; (pyim-isearch-mode 1)
 
   ;; 使用 pupup-el 来绘制选词框, 如果用 emacs26, 建议设置
   ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
@@ -151,3 +147,20 @@
   :bind
   (("M-l" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-;" . pyim-delete-word-from-personal-buffer)))
+
+(def-package! eaf
+  :load-path "/home/xhcoding/Code/ELisp/emacs-application-framework/"
+  :commands (eaf-open)
+  :config
+  (evil-set-initial-state 'eaf-mode 'emacs))
+
+
+(after! eshell
+  (setq eshell-directory-name (expand-file-name "eshell" doom-etc-dir)))
+
+(def-package! aweshell)
+
+(def-package! color-rg
+  :commands (color-rg-search-input))
+
+(global-auto-revert-mode 0)

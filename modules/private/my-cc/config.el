@@ -8,6 +8,7 @@
   :after cc-mode
   :commands (cp-project-refresh cp-project-new)
   :config
+  (add-hook! (c-mode c++-mode) #'cp-project-refresh)
   (defun +my-cc-gen-template()
     (concat
      (format "cmake_minimum_required(VERSION %s)" cp-cmake-minimum-version)

@@ -9,12 +9,17 @@
 (setq display-line-numbers-type nil)
 
 ;; font
-(defun +my|init-font(frame)
-  (with-selected-frame frame
-    (if (display-graphic-p)
-        (+my/better-font))))
+(setq doom-font (font-spec :family "Sarasa Term SC" :size 14))
+(setq doom-font (font-spec :family "Sarasa Term SC" :size 17))
 
-(if (and (fboundp 'daemonp) (daemonp))
-    (add-hook 'after-make-frame-functions #'+my|init-font)
-  (+my/better-font))
+;;
+;;
+;; (defun +my|init-font(frame)
+;;   (with-selected-frame frame
+;;     (if (display-graphic-p)
+;;         (+my/better-font))))
+
+;; (if (and (fboundp 'daemonp) (daemonp))
+;;     (add-hook 'after-make-frame-functions #'+my|init-font)
+;;   (+my/better-font))
 

@@ -73,15 +73,36 @@
         org-latex-default-class "ctexart"
         )
 
-  ;; org-capture
   (require 'org-protocol)
-  (setq org-capture-templates `(
-	                            ("P" "Protocol" entry (file+headline ,(expand-file-name "web.org" +my-org-dir) "Inbox")
-	                             "* [[%:link]]\nSource: %u\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	                            ("L" "Protocol Link" entry (file+headline ,(expand-file-name "web.org" +my-org-dir) "Inbox")
-	                             "* %? [[%:link][%:description]] \nCaptured On: %U")
-                                ("t" "Todo" entry
-                                 (file+headline ,(expand-file-name "todo.org" +my-org-dir) "Inbox")
-                                 "* TODO %?\n%i" :prepend t :kill-buffer t)
-                                ))
+
+  (setq org-capture-templates
+        `(
+          ("ts" "Study Task" entry
+           (file+headline ,(expand-file-name "gtd.org" +my-org-dir) "Tasks")
+           "* TODO %^{Brief Description}\tAdded: %U\t:Study:\n%?")
+          ("tp" "Project Task" entry
+           (file+headline ,(expand-file-name "gtd.org" +my-org-dir) "Tasks")
+           "* TODO %^{Brief Description}\tAdded: %U\t:Project:\n%?")
+          ("ps" "Protocol Text" plain
+           (file+function ,(expand-file-name "web.org" +my-org-dir) org-capture-template-goto-link)
+           "Added: %U\n\t%:initial" :empty-lines 1 :immediate-finish t :kill-buffer t)
+          ("pb" "Protocol Bookmarks" entry
+           (file+headline ,(expand-file-name "web.org" +my-org-dir) "Bookmarks")
+           "* %:annotation\tAdded: %U" :empty-lines 1 :immediate-finish t :kill-buffer t)
+          ))
   )
+
+(defun org-capture-template-goto-link ()
+  (org-capture-put :target (list 'file+headline
+                                 (nth 1 (org-capture-get :target))
+                                 (org-capture-get :annotation)))
+  (org-capture-put-target-region-and-position)
+  (widen)
+  (let ((hd (nth 2 (org-capture-get :target))))
+    (goto-char (point-min))
+    (if (re-search-forward
+         (format org-complex-heading-regexp-format (regexp-quote hd)) nil t)
+        (org-end-of-subtree)
+      (goto-char (point-max))
+      (or (bolp) (insert "\n"))
+      (insert "** " hd "\n"))))

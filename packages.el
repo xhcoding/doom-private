@@ -13,6 +13,9 @@
 (package! isolate :recipe (:fetcher github :repo "casouri/isolate"))
 (package! color-rg :recipe (:fetcher github :repo "manateelazycat/color-rg"))
 (package! company-english-helper :recipe (:fetcher github :repo "manateelazycat/company-english-helper"))
+(package! eaf :recipe (:fetcher github :repo "manateelazycat/emacs-application-framework" :files ("*")) :ignore t)
+(package! aweshell :recipe (:fetcher github :repo "manateelazycat/aweshell"))
+
 
 (package! auto-save :ignore t)
 (package! scroll-other-window :ignore t)
