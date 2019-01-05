@@ -6,7 +6,7 @@
 
 (def-package! cmake-project
   :after cc-mode
-  :commands (cp-project-refresh cp-project-new)
+  :commands (cp-project-refresh cp-project-new cp-project-debug)
   :config
   (add-hook! (c-mode c++-mode) #'cp-project-refresh)
   (defun +my-cc-gen-template()

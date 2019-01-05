@@ -3,7 +3,9 @@
 ;; theme
 ;; cycle by +my/toggle-cycle-theme, binding SPC t t
 (defvar +my-themes '(doom-one doom-one-light doom-dracula))
-(setq doom-theme 'doom-one-light)
+(if (display-graphic-p)
+    (setq doom-theme 'doom-one-light)
+  (setq doom-theme 'doom-one))
 
 ;; disable line-number
 (setq display-line-numbers-type nil)
@@ -22,4 +24,3 @@
 ;; (if (and (fboundp 'daemonp) (daemonp))
 ;;     (add-hook 'after-make-frame-functions #'+my|init-font)
 ;;   (+my/better-font))
-

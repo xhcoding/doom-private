@@ -1,27 +1,26 @@
-* TODO 完善文档
+* 简介
+** 新建工程 ~cp-project-new~
+[[img/new-project.gif]]
+** 补全
+[[img/complete.gif]]
+** 查看定义和引用 ~lsp-ui-peek-find-definitions lsp-ui-peek-find-references~
+[[img/def.gif]]
+** 运行 ~cp-project-run~
+[[img/run.gif]]
+** 调试 ~dap-debug~
+[[img/debug.gif]]
 * 安装
-** Linux
-*** 前置软件
-git clang cmake gcc gdb make
-- Arch Linux =pacman -S git clang cmake gcc gdb make=
-*** Emacs
-要求Emacs的版本在25.1以上
-- Arch Linux =pacman -S emacs= 或 =pacman -S emacs-git=
-*** Doom及Doom-Private
-Doom Emacs的核心和本仓库的文件，即Doom-Emacs的C/C++配置等
+** 安装配置文件
 #+BEGIN_SRC shell
 git clone -b develop https://github.com/hlissner/.emacs.d ~/.emacs.d
 git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
 cd ~/.emacs.d
 make all
 #+END_SRC
-
-*** ccls
-补全C/C++需要的服务端
-安装文档:https://github.com/MaskRay/ccls/wiki/Getting-started
-
-Arch Linux可以直接安装：=pacman -S ccls-git=
-
+** 安装补全服务端ccls
+补全需要的服务端，[[https://github.com/MaskRay/ccls/wiki/Build][ccls安装方法]]
+** 安装调试服务端vscode-lldb
+[[https://github.com/llvm-mirror/lldb/tree/master/tools/lldb-vscode][安装方法]]
 
 * 用法
 打开一个CMake 项目后先运行 M-x cp-project-refresh
@@ -29,5 +28,3 @@ Arch Linux可以直接安装：=pacman -S ccls-git=
 - 生成CMake 配置文件：M-x cp-project-gen
 - 构建项目：cp-project-build
 - 运行项目：cp-project-run
-* 效果展示
-[[img/linux.gif]]

@@ -49,7 +49,10 @@
 ;; lsp client config
 
 (load! "+ccls")
-
+(def-package! dap-lldb
+  :after (ccls)
+  :config
+  (setq dap-lldb-debugged-program-function 'cp-project-debug))
 
 ;; ms-python
 (def-package! ms-python
