@@ -2,7 +2,7 @@
 
 (def-package! ccls
   :init
-  (add-hook! (c-mode c++-mode) #'lsp)
+  (add-hook! (c-mode c++-mode cuda-mode) #'lsp)
   :config
 
   ;; default is "ccls"
@@ -14,6 +14,7 @@
   ;; (ccls-use-default-rainbow-sem-highlight)
 
   ;; https://github.com/MaskRay/ccls/wiki/Initialization-options
+ (setq ccls-initialization-options `(:cacheDirectory ,(expand-file-name "~/Code/ccls_cache")))
 
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
 

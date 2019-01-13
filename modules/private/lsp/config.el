@@ -5,7 +5,8 @@
 (def-package! lsp-mode
   :commands (lsp-register-client)
   :config
-  (setq lsp-auto-guess-root t
+  (setq lsp-print-io nil
+        lsp-auto-guess-root t
         lsp-prefer-flymake nil
         lsp-session-file (expand-file-name ".lsp-session" doom-etc-dir)
         lsp-project-blacklist '("^/usr/")
@@ -42,6 +43,7 @@
   :after lsp-mode
   :config
   (setq dap--breakpoints-file (expand-file-name ".dap-breakpoints" doom-etc-dir))
+  (setq dap-print-io nil)
   (dap-mode +1)
   (dap-ui-mode +1))
 
@@ -52,7 +54,8 @@
 (def-package! dap-lldb
   :after (ccls)
   :config
-  (setq dap-lldb-debugged-program-function 'cp-project-debug))
+  (setq dap-lldb-debugged-program-function 'cp-project-debug)
+  )
 
 ;; ms-python
 (def-package! ms-python
