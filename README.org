@@ -19,7 +19,7 @@ make all
 #+END_SRC
 ** 安装补全服务端ccls
 补全需要的服务端，[[https://github.com/MaskRay/ccls/wiki/Build][ccls安装方法]]
-** 安装调试服务端vscode-lldb
+** 安装调试服务端lldb-vscode
 [[https://github.com/llvm-mirror/lldb/tree/master/tools/lldb-vscode][安装方法]]
 
 * 用法
