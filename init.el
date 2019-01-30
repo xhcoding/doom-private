@@ -1,12 +1,20 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; 插件源
-(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://elpa.emacs-china.org/melpa/")
-			             ("org"   . "http://elpa.emacs-china.org/org/")))
+(setq package-archives '(("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+			             ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
 
-;; 载入与个人非常相关的配置
-(load! "+self.el")
+;; 扩展
+(defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
+;; 代码片段
+(defvar +my-yas-snipper-dir (expand-file-name "~/.config/doom/snippets"))
+;; Org文件
+(defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
+
+
+(setq user-full-name "xhcoding"
+      user-mail-address "xhcoding@163.com")
 
 (doom!
  :feature

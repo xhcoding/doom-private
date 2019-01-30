@@ -99,6 +99,7 @@
   (setq-hook! LaTeX-mode TeX-command-default "XeLaTex")
 
   (setq TeX-save-query nil)
+
   (when (fboundp 'eaf-open)
     (add-to-list 'TeX-view-program-list '("eaf" TeX-eaf-sync-view))
     (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
