@@ -3,9 +3,7 @@
 ;; theme
 ;; cycle by +my/toggle-cycle-theme, binding SPC t t
 (defvar +my-themes '(doom-one doom-one-light doom-dracula))
-(if (display-graphic-p)
-    (setq doom-theme 'doom-one-light)
-  (setq doom-theme 'doom-one))
+(setq doom-theme 'doom-one-light)
 
 ;; disable line-number
 (setq display-line-numbers-type nil)

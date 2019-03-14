@@ -29,6 +29,8 @@
     :definition #'lsp-ui-peek-find-definitions
     :references #'lsp-ui-peek-find-references)
   (setq
+   lsp-ui-doc-use-webkit nil
+   lsp-ui-doc-use-childframe t
    lsp-ui-doc-max-height 20
    lsp-ui-doc-max-width 50
    lsp-ui-sideline-enable nil
@@ -66,8 +68,9 @@
     (setq projectile-project-root-files-top-down-recurring
           (append '("compile_commands.json")
                   projectile-project-root-files-top-down-recurring))
-    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache"))
-
+    (add-to-list 'projectile-globally-ignored-directories ".ccls-cache")
+    (add-to-list 'projectile-globally-ignored-directories "build")
+    )
   )
 
 
@@ -80,6 +83,7 @@
 ;; ms-python
 (def-package! ms-python
   :config
+  (add-hook! 'python-mode-hook #'+my-python/enable-lsp)
   (setq ms-python-server-install-dir (expand-file-name "ms-pyls" doom-etc-dir))
   )
 

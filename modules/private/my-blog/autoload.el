@@ -15,7 +15,7 @@
         (regexp-quote (expand-file-name +my-blog-root-dir))
         (expand-file-name filename))
        0)
-      (concat  +my-blog-res-url (string-trim-left filename +my-blog-img-dir))
+      (concat  +my-blog-image-url (string-trim-left filename +my-blog-img-dir))
     nil))
 
 

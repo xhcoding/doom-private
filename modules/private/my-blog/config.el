@@ -1,15 +1,15 @@
 ;;; private/my-blog/config.el -*- lexical-binding: t; -*-
 
 (defvar +my-blog-root-dir
-  "~/Documents/Blog/"
+  "~/Blog/"
   "Blog root directory.")
 
 (defvar +my-blog-img-dir
   (expand-file-name "images/" +my-blog-root-dir)
   "Blog's image directory.")
 
-(defvar +my-blog-res-url
-  "http://source.xhcoding.cn/")
+(defvar +my-blog-image-url
+  "http://source.xhcoding.cn/images/")
 
 
 (def-package! org-octopress

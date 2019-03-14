@@ -5,10 +5,8 @@
 (load! "+org")
 
 ;; remove doom advice, I don't need deal with comments when newline
-(advice-remove #'newline-and-indent #'doom*newline-and-indent)
+(advice-remove #'newline-and-indent #'doom*newline-indent-and-continue-comments)
 
-(after! evil
-  (setq evil-want-integration t))
 
 ;; Reconfigure packages
 (after! evil-escape
@@ -23,57 +21,13 @@
         company-tooltip-limit 10
         company-show-numbers t
         company-global-modes '(not comint-mode erc-mode message-mode help-mode gud-mode)
-        )
-  (map! :map company-active-map
-        "M-g" #'company-abort
-        "M-d" #'company-next-page
-        "M-u" #'company-previous-page))
+        ))
 
-(def-package! package-lint
-  :commands (package-lint-current-buffer))
-
-(def-package! auto-save
-  :load-path +my-ext-dir
-  :config
-  (setq +my-auto-save-timer nil)
-  (setq auto-save-slient t))
-
-(def-package! visual-regexp
-  :commands (vr/query-replace vr/replace)
-  )
 
 (after! emacs-snippets
   (add-to-list 'yas-snippet-dirs +my-yas-snipper-dir))
 
 
-(def-package! company-english-helper
-  :commands (toggle-company-english-helper))
-
-
-(def-package! scroll-other-window
-  :load-path +my-ext-dir
-  :config
-  (sow-mode 1)
-  (map!
-   :gnvime "<M-up>"    #'sow-scroll-other-window-down
-   :gnvime "<M-down>"  #'sow-scroll-other-window))
-
-
-(def-package! openwith
-  :load-path +my-ext-dir
-  :config
-  (setq openwith-associations
-        '(
-          ("\\.pdf\\'" "okular" (file))
-          ("\\.docx?\\'" "wps" (file))
-          ("\\.pptx?\\'" "wpp" (file))
-          ("\\.xlsx?\\'" "et" (file))))
-  (add-hook! :append 'emacs-startup-hook #'openwith-mode))
-
-
-(set-lookup-handlers! 'emacs-lisp-mode :documentation #'helpful-at-point)
-
-(set-company-backend! '(yaml-mode cmake-mode) 'company-dabbrev)
 
 (after! format
   (set-formatter!
@@ -102,8 +56,44 @@
 
   (when (fboundp 'eaf-open)
     (add-to-list 'TeX-view-program-list '("eaf" TeX-eaf-sync-view))
-    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf")))
-  )
+    (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))))
+
+
+
+(after! eshell
+  (setq eshell-directory-name (expand-file-name "eshell" doom-etc-dir)))
+
+(global-auto-revert-mode 0)
+
+
+(def-package! visual-regexp
+  :commands (vr/query-replace vr/replace))
+
+(def-package! package-lint
+  :commands (package-lint-current-buffer))
+
+(def-package! auto-save
+  :load-path +my-ext-dir
+  :config
+  (setq +my-auto-save-timer nil)
+  (setq auto-save-slient t))
+
+
+(def-package! company-english-helper
+  :commands (toggle-company-english-helper))
+
+
+(def-package! openwith
+  :load-path +my-ext-dir
+  :config
+  (setq openwith-associations
+        '(
+          ("\\.pdf\\'" "okular" (file))
+          ("\\.docx?\\'" "wps" (file))
+          ("\\.pptx?\\'" "wpp" (file))
+          ("\\.xlsx?\\'" "et" (file))))
+  (add-hook! :append 'emacs-startup-hook #'openwith-mode))
+
 
 (def-package! pyim
   :defer 2
@@ -156,13 +146,3 @@
   :config
   (evil-set-initial-state 'eaf-mode 'emacs))
 
-
-(after! eshell
-  (setq eshell-directory-name (expand-file-name "eshell" doom-etc-dir)))
-
-(def-package! aweshell)
-
-(def-package! color-rg
-  :commands (color-rg-search-input))
-
-(global-auto-revert-mode 0)

@@ -3,7 +3,7 @@
 ;; 插件源
 (setq package-archives '(("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-			             ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
+                         ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
 
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
@@ -23,9 +23,6 @@
  (evil +everywhere); come to the dark side, we have cookies
  lookup           ; helps you navigate your code and documentation
  snippets          ; my elves. They type so I don't have to
- (syntax-checker   ; tasing you for every semicolon you forget
-  +childframe
-  )
  workspaces        ; tab emulation, persistence & separate workspaces
 
  :completion
@@ -40,7 +37,7 @@
  :ui
  doom              ; what makes DOOM look the way it does
  doom-dashboard    ; a nifty splash screen for Emacs
- doom-modeline     ; a snazzy Atom-inspired mode-line
+ modeline     ; a snazzy Atom-inspired mode-line
  doom-quit         ; DOOM quit-message prompts when you quit Emacs
  hl-todo           ; highlight TODO/FIXME/NOTE tags
  nav-flash         ; blink the current line after jumping
@@ -56,25 +53,28 @@
  :editor
  format            ; automated prettiness
  multiple-cursors  ; editing in many places at once
+ fold
 
  :emacs
- dired             ; making dired pretty [functional]
- ediff             ; comparing files in Emacs
- ;; eshell            ; a consistent, cross-platform shell (WIP)
- hideshow          ; basic code-folding support
+(dired             ; making dired pretty [functional]
+ +icons
+ +ranger
+ )
+ ;;eshell            ; a consistent, cross-platform shell (WIP)
  imenu             ; an imenu sidebar and searchable code index
  vc                ; version-control and Emacs, sitting in a tree
 
  :tools
  magit
+ vterm
+ flycheck
 
  :lang
  assembly          ; assembly for fun or debugging
  cc               ; C/C++/Obj-C madness
  data              ; config/data formats
  emacs-lisp        ; drown in parentheses
- (latex            ; writing papers in Emacs has never been so fun
-  )
+ latex            ; writing papers in Emacs has never been so fun
  (org              ; organize your plain life in plain text
   +attach          ; custom attachment system
   +babel           ; running code in org
@@ -90,6 +90,8 @@
  web               ; the tubes
 
  :app
+ email
+ (rss +org)        ; emacs as an RSS reader
 
  :collab
 
@@ -98,7 +100,7 @@
  ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
  ;; and additional ex commands for evil-mode. Use it as a reference for
  ;; your own modules.
- (default +bindings +smartparens)
+ (default +bindings +smartparens +evil)
 
  :private
  lsp

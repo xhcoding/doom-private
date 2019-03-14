@@ -11,8 +11,8 @@
         ;; chinese font
         (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
-		                    charset
-		                    (font-spec :family "WenQuanYi Micro Hei Mono" :size 20)))))) ;; 14 16 20 22 28
+                            charset
+                            (font-spec :family "WenQuanYi Micro Hei Mono" :size 20)))))) ;; 14 16 20 22 28
 
 ;;;###autoload
 (defun +my/toggle-cycle-theme ()
@@ -44,9 +44,9 @@
   (interactive "r")
   (save-excursion
     (if (use-region-p)
-	    (indent-region beg end)
-	  (+my/indent-buffer)
-	  )))
+        (indent-region beg end)
+      (+my/indent-buffer)
+      )))
 
 ;;;###autoload
 (defun +my/indent-or-format(beg end)
@@ -88,57 +88,14 @@
   "Rename both current buffer and file it's visiting to NEW_NAME"
   (interactive "sNew name: ")
   (let ((name (buffer-name))
-	    (filename (buffer-file-name)))
+        (filename (buffer-file-name)))
     (unless filename
       (error "Buffer '%s' is not visiting a file" name))
     (progn
       (when (file-exists-p filename)
-	    (rename-file filename new-name 1))
+        (rename-file filename new-name 1))
       (set-visited-file-name new-name)
       (rename-buffer new-name))))
-
-
-;;;###autoload
-(defun +my/kill-in-pair()
-  "Kill text in pair"
-  (interactive)
-  (let ((beg (progn (sp-backward-sexp) (point)))
-        (end (progn (backward-char) (sp-forward-sexp) (backward-char) (point))))
-    (kill-region beg end)))
-
-;;;###autoload
-(defun +my/toggle-chrome-play-video()
-  (interactive)
-  (call-process-shell-command "~/Tools/linux-useful-scripts/toggle-chrome-play-video.sh"))
-
-;;;autoload
-(defun +my/newline()
-  (interactive)
-  (end-of-line)
-  (newline-and-indent))
-
-;;;###autoload
-(defun +my--guess-linux-release(regexp)
-  "Guess linux release"
-  (let ((maybe-get-dis-str (shell-command-to-string "cat /etc/*release")))
-    (with-temp-buffer
-      (insert maybe-get-dis-str)
-      (beginning-of-buffer)
-      (condition-case nil
-          (progn
-            (search-forward-regexp regexp)
-            (downcase (buffer-substring (match-beginning 1) (match-end 1))))
-        (search-failed nil)))))
-
-;;;###autoload
-(defun +my-guess-linux-based-distribution()
-  "Guess linux distribution family"
-  (guess-linux-release "^ID_LIKE=\"?\\([a-zA-Z ]*\\)\"?$"))
-
-;;;###autoload
-(defun +my-guess-linux-distribution()
-  "Guess linux distribution"
-  (guess-linux-release "^ID=\"?\\([a-zA-Z ]*\\)\"?$"))
 
 ;;;###autoload
 (defun +my--replace-pairs(content pairs &optional to-direction)
@@ -196,14 +153,3 @@
     (if (and exists-eaf-buffer eaf-buffer-window)
         (pop-to-buffer exists-eaf-buffer)
       (eaf-open url app-name "--synctex_on=True"))))
-
-
-;;;###autoload
-(defun browse-current-file ()
-  "Open the current file as a URL using `browse-url'."
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (if (and (fboundp 'tramp-tramp-file-p)
-             (tramp-tramp-file-p file-name))
-        (error "Cannot open tramp file")
-      (browse-url (concat "file://" file-name)))))
