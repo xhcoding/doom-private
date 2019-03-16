@@ -2,7 +2,6 @@
 (map! [remap indent-region] #'+my/indent-or-format
       (:leader
         (:prefix "o"
-          :desc "Agenda"           :n  "a"    #'org-agenda
           :desc "Blog"             :n  "B"    #'+my-blog/open-org-octopress
           )
         (:desc "toggle" :prefix "t"

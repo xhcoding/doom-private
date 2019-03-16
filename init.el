@@ -18,7 +18,6 @@
 
 (doom!
  :feature
- debugger
  eval              ; run code, run (also, repls)
  (evil +everywhere); come to the dark side, we have cookies
  lookup           ; helps you navigate your code and documentation
@@ -82,12 +81,10 @@
   +export          ; Exporting org to whatever you want
   +present         ; Emacs for presentations
   )
- javascript        ; all(hope(abandon(ye(who(enter(here))))))
  plantuml          ; diagrams for confusing people more
  (python            ; beautiful is better than ugly
   +pyvenv
   )
- web               ; the tubes
 
  :app
  email

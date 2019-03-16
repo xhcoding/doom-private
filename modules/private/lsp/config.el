@@ -7,6 +7,8 @@
   :config
   (setq lsp-print-io nil
         lsp-auto-guess-root t
+        ;;NOTE:
+        lsp-json-use-lists t
         lsp-prefer-flymake nil
         lsp-enable-on-type-formatting nil
         lsp-session-file (expand-file-name ".lsp-session" doom-etc-dir)
