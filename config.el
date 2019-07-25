@@ -65,6 +65,24 @@
 
 (global-auto-revert-mode 0)
 
+(after! lsp-ui
+  (setq
+   lsp-ui-doc-use-webkit t
+   lsp-ui-doc-max-height 20
+   lsp-ui-doc-max-width 50
+   lsp-ui-sideline-enable nil
+   lsp-ui-peek-always-show t)
+  (map!
+   :map lsp-ui-peek-mode-map
+   "h" #'lsp-ui-peek--select-prev-file
+   "j" #'lsp-ui-peek--select-next
+   "k" #'lsp-ui-peek--select-prev
+   "l" #'lsp-ui-peek--select-next-file))
+
+(after! ccls
+  (setq ccls-initialization-options `(:cache (:directory ,(expand-file-name "~/Code/ccls_cache"))))
+  (evil-set-initial-state 'ccls-tree-mode 'emacs))
+
 
 (def-package! visual-regexp
   :commands (vr/query-replace vr/replace))

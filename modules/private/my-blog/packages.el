@@ -5,3 +5,6 @@
 (package! ctable)
 (package! epic)
 (package! orglue)
+
+(package! ox-hugo)
+(package! easy-hugo)

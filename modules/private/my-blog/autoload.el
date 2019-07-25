@@ -20,6 +20,23 @@
 
 
 ;;;###autoload
+(defun +my-blog*easy-hugo--org-headers (file)
+  "Return a draft org mode header string for a new article as FILE."
+  (let ((date
+          (format-time-string "%Y-%m-%d")))
+    (concat
+     "#+HUGO_BASE_DIR: ../"
+     "\n#+TITLE: " file
+     "\n#+DATE: " date
+     "\n#+AUTHOR:"
+     "\n#+HUGO_CUSTOM_FRONT_MATTER: :author \"xhcoding\""
+     "\n#+HUGO_TAGS: "
+     "\n#+HUGO_CATEGORIES: "
+     "\n#+DRAFT: false"
+     "\n\n")))
+
+
+;;;###autoload
 (defun +my-blog-kill-new-img-link(prefix imagename)
   (kill-new (format "[[file:%s%s]] " prefix imagename imagename)))
 

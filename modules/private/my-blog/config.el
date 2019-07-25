@@ -24,3 +24,14 @@
    ))
 
 (advice-add #'org-export-file-uri :before-until #'+my-blog*export-blog-image-url)
+
+
+(def-package! ox-hugo)
+
+(def-package! easy-hugo
+  :config
+  (setq easy-hugo-basedir (expand-file-name "~/Blog/")
+        easy-hugo-postdir "blog"
+        easy-hugo-org-header t)
+  (evil-set-initial-state 'easy-hugo-mode 'emacs)
+  (advice-add #'easy-hugo--org-headers :override #'+my-blog*easy-hugo--org-headers))

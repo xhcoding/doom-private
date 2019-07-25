@@ -2,7 +2,7 @@
 (map! [remap indent-region] #'+my/indent-or-format
       (:leader
         (:prefix "o"
-          :desc "Blog"             :n  "B"    #'+my-blog/open-org-octopress
+          :desc "Blog"             :n  "B"    #'easy-hugo
           )
         (:desc "toggle" :prefix "t"
           :desc "Transparency"     :n  "T"    #'+my/toggle-transparency

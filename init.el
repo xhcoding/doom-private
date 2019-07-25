@@ -1,9 +1,9 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; 插件源
-(setq package-archives '(("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-                         ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")))
+(setq package-archives '(("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+                         ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+                         ("org-cn"   . "http://elpa.emacs-china.org/org/")))
 
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
@@ -17,12 +17,8 @@
       user-mail-address "xhcoding@163.com")
 
 (doom!
- :feature
- eval              ; run code, run (also, repls)
- (evil +everywhere); come to the dark side, we have cookies
- lookup           ; helps you navigate your code and documentation
- snippets          ; my elves. They type so I don't have to
- workspaces        ; tab emulation, persistence & separate workspaces
+ :input
+ chinese
 
  :completion
  (company           ; the ultimate code completion backend
@@ -40,7 +36,6 @@
  doom-quit         ; DOOM quit-message prompts when you quit Emacs
  hl-todo           ; highlight TODO/FIXME/NOTE tags
  nav-flash         ; blink the current line after jumping
- evil-goggles      ; display visual hints when editing in evil
  (window-select    ; visually switch windows
   +ace-window)
 
@@ -48,59 +43,55 @@
  (popup            ; tame sudden yet inevitable temporary windows
   +all
   +defaults)
+ workspaces        ; tab emulation, persistence & separate workspaces
+ ophints
 
  :editor
+ (evil +everywhere); come to the dark side, we have cookies
  format            ; automated prettiness
  multiple-cursors  ; editing in many places at once
  fold
+ snippets          ; my elves. They type so I don't have to
 
  :emacs
 (dired             ; making dired pretty [functional]
  +icons
  +ranger
  )
- ;;eshell            ; a consistent, cross-platform shell (WIP)
- imenu             ; an imenu sidebar and searchable code index
  vc                ; version-control and Emacs, sitting in a tree
+
+ :term
+ vterm             ; another terminals in Emacs
 
  :tools
  magit
- vterm
  flycheck
+ lsp
+ eval              ; run code, run (also, repls)
+ lookup           ; helps you navigate your code and documentation
 
  :lang
- assembly          ; assembly for fun or debugging
- cc               ; C/C++/Obj-C madness
+ (cc               ; C/C++/Obj-C madness
+  +lsp)
  data              ; config/data formats
  emacs-lisp        ; drown in parentheses
  latex            ; writing papers in Emacs has never been so fun
  (org              ; organize your plain life in plain text
-  +attach          ; custom attachment system
-  +babel           ; running code in org
-  +capture         ; org-capture in and outside of Emacs
-  +export          ; Exporting org to whatever you want
-  +present         ; Emacs for presentations
-  )
+ +dragndrop       ; file drag & drop support
+ +ipython         ; ipython support for babel
+ +pandoc          ; pandoc integration into org's exporter
+ +present)        ; using Emacs for presentations
  plantuml          ; diagrams for confusing people more
- (python            ; beautiful is better than ugly
-  +pyvenv
-  )
-
- :app
- email
- (rss +org)        ; emacs as an RSS reader
-
- :collab
 
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides
  ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
  ;; and additional ex commands for evil-mode. Use it as a reference for
  ;; your own modules.
- (default +bindings +smartparens +evil)
+ (default +bindings +smartparens)
 
  :private
- lsp
+ ;; lsp
  my-cc
  my-blog
  )
