@@ -39,7 +39,7 @@
 
 
 ;;;###autoload
-(defun +my/indent-region-or-buffer(beg end)
+(defun +my/indent-region-or-buffer(&optional beg end)
   "Indent a region if selected, otherwise the whole buffer."
   (interactive "r")
   (save-excursion
@@ -49,11 +49,11 @@
       )))
 
 ;;;###autoload
-(defun +my/indent-or-format(beg end)
+(defun +my/indent-or-format(&optional beg end)
   (interactive "r")
   (if (+my--support-format-p)
       (progn
-        (+format/region-or-buffer beg end)
+        (+format/region-or-buffer)
         (message "formated"))
     (progn
       (+my/indent-region-or-buffer beg end)

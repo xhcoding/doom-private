@@ -7,7 +7,6 @@
   (add-hook! (c-mode c++-mode) #'google-set-c-style))
 
 (def-package! cmake-project
-  :after cc-mode
   :commands (cp-project-refresh cp-project-new cp-project-debug)
   :config
   (add-hook! (c-mode c++-mode) #'cp-project-refresh)

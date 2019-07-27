@@ -32,7 +32,7 @@
      "\n#+HUGO_CUSTOM_FRONT_MATTER: :author \"xhcoding\""
      "\n#+HUGO_TAGS: "
      "\n#+HUGO_CATEGORIES: "
-     "\n#+DRAFT: false"
+     "\n#+HUGO_DRAFT: false"
      "\n\n")))
 
 

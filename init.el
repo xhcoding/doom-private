@@ -5,6 +5,9 @@
                          ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
                          ("org-cn"   . "http://elpa.emacs-china.org/org/")))
 
+;; 调试模式
+(setq doom-debug-mode nil)
+
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
 ;; 代码片段
@@ -18,7 +21,6 @@
 
 (doom!
  :input
- chinese
 
  :completion
  (company           ; the ultimate code completion backend
@@ -94,4 +96,6 @@
  ;; lsp
  my-cc
  my-blog
+ (my-chinese
+  +rime)
  )
