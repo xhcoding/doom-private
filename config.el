@@ -65,7 +65,11 @@
 
 (global-auto-revert-mode 0)
 
+(after! lsp
+  (setq lsp-auto-guess-root nil))
+
 (after! lsp-ui
+  (add-hook! 'lsp-ui-mode-hook #'lsp-ui-doc-mode)
   (setq
    lsp-ui-doc-use-webkit t
    lsp-ui-doc-max-height 20
@@ -89,6 +93,13 @@
 
 (def-package! package-lint
   :commands (package-lint-current-buffer))
+
+(def-package! lsp-python-ms
+  :config
+  (setq lsp-python-ms-dir (expand-file-name "mspyls/" doom-etc-dir))
+  (setq lsp-python-ms-executable  (concat lsp-python-ms-dir
+                                         "Microsoft.Python.LanguageServer"
+                                         (and (eq system-type 'windows-nt) ".exe"))))
 
 (def-package! auto-save
   :load-path +my-ext-dir

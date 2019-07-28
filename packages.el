@@ -6,6 +6,7 @@
 (package! org-edit-latex)
 (package! package-lint)
 
+(package! lsp-python-ms)
 
 (package! company-english-helper :recipe (:fetcher github :repo "manateelazycat/company-english-helper"))
 

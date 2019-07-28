@@ -84,6 +84,8 @@
  +pandoc          ; pandoc integration into org's exporter
  +present)        ; using Emacs for presentations
  plantuml          ; diagrams for confusing people more
+ (python
+  +lsp)
 
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides
