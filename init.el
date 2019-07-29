@@ -86,6 +86,9 @@
  plantuml          ; diagrams for confusing people more
  (python
   +lsp)
+ markdown          ; writing docs for people to ignore
+ (go
+  +lsp)
 
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides

@@ -84,6 +84,9 @@
           ("tp" "Project Task" entry
            (file+headline ,(expand-file-name "gtd.org" +my-org-dir) "Tasks")
            "* TODO %^{Brief Description}\tAdded: %U\t:Project:\n%?")
+          ("wc" "Work Code Note" entry
+           (file+headline ,(expand-file-name "work-note.org" +my-org-dir) "Code")
+           "* %^{Brief Description}\tAdded: %U\t:Work:\n%?")
           ("ps" "Protocol Text" plain
            (file+function ,(expand-file-name "web.org" +my-org-dir) org-capture-template-goto-link)
            "Added: %U\n\t%:initial" :empty-lines 1 :immediate-finish t :kill-buffer t)

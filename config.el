@@ -66,12 +66,12 @@
 (global-auto-revert-mode 0)
 
 (after! lsp
-  (setq lsp-auto-guess-root nil))
+  (setq lsp-auto-guess-root t))
 
 (after! lsp-ui
   (add-hook! 'lsp-ui-mode-hook #'lsp-ui-doc-mode)
   (setq
-   lsp-ui-doc-use-webkit t
+   lsp-ui-doc-use-webkit nil
    lsp-ui-doc-max-height 20
    lsp-ui-doc-max-width 50
    lsp-ui-sideline-enable nil
