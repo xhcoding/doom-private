@@ -2,9 +2,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-(def-package! google-c-style
-  :config
-  (add-hook! (c-mode c++-mode) #'google-set-c-style))
 
 (def-package! cmake-project
   :commands (cp-project-refresh cp-project-new cp-project-debug)
@@ -21,7 +18,7 @@
      (format "\n\nadd_executable(main main.cc)")
      ))
   (setq cp-project-template-function '+my-cc-gen-template)
-  (when (and (not IS-WINDOWS) (featurep! :private lsp))
+  (when (and (not IS-WINDOWS) (featurep! :tools lsp))
     (add-hook
      'cp-after-new-project-hook
      #'(lambda()
@@ -38,3 +35,8 @@
 
 (after! realgud
   (setq realgud-safe-mode nil))
+
+(def-package! my-work-c-style
+  :load-path +my-ext-dir
+  :config
+  (add-hook! (c-mode c++-mode) #'my-work-set-c-style))

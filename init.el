@@ -11,7 +11,7 @@
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
 ;; 代码片段
-(defvar +my-yas-snipper-dir (expand-file-name "~/.config/doom/snippets"))
+(defvar +my-private-snippets-dir (expand-file-name "private/snippets/" doom-private-dir))
 ;; Org文件
 (defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
 
@@ -89,7 +89,11 @@
  markdown          ; writing docs for people to ignore
  (go
   +lsp)
-
+ (javascript        ; all(hope(abandon(ye(who(enter(here))))))
+  +lsp)
+ (rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+  +lsp)
+ 
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides
  ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,

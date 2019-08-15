@@ -13,7 +13,10 @@
   (setq evil-escape-key-sequence "jk"))
 
 (after! projectile
-  (setq projectile-require-project-root t))
+  (setq projectile-require-project-root t)
+  (setq projectile-project-root-files-top-down-recurring
+        (append '("compile_commands.json")
+                projectile-project-root-files-top-down-recurring)))
 
 (after! company
   (setq company-minimum-prefix-length 1
@@ -24,8 +27,8 @@
         ))
 
 
-(after! emacs-snippets
-  (add-to-list 'yas-snippet-dirs +my-yas-snipper-dir))
+(after! yasnippet
+  (add-to-list 'yas-snippet-dirs #'+my-private-snippets-dir nil #'eq))
 
 
 
@@ -85,7 +88,17 @@
 
 (after! ccls
   (setq ccls-initialization-options `(:cache (:directory ,(expand-file-name "~/Code/ccls_cache"))))
-  (evil-set-initial-state 'ccls-tree-mode 'emacs))
+  (setq ccls-sem-highlight-method 'font-lock)
+  (ccls-use-default-rainbow-sem-highlight)
+  (evil-set-initial-state 'ccls-tree-mode 'emacs)
+
+  (defun +my--suggest-project-root ()
+    (and (memq major-mode '(c-mode c++-mode cuda-mode objc-mode))
+         (when-let (dir (locate-dominating-file default-directory "compile_commands.json"))
+           (expand-file-name dir))))
+
+  (advice-add 'ccls--suggest-project-root :before-until #'+my--suggest-project-root)
+  )
 
 
 (def-package! visual-regexp
@@ -98,8 +111,8 @@
   :config
   (setq lsp-python-ms-dir (expand-file-name "mspyls/" doom-etc-dir))
   (setq lsp-python-ms-executable  (concat lsp-python-ms-dir
-                                         "Microsoft.Python.LanguageServer"
-                                         (and (eq system-type 'windows-nt) ".exe"))))
+                                          "Microsoft.Python.LanguageServer"
+                                          (and (eq system-type 'windows-nt) ".exe"))))
 
 (def-package! auto-save
   :load-path +my-ext-dir

@@ -87,6 +87,9 @@
           ("wc" "Work Code Note" entry
            (file+headline ,(expand-file-name "work-note.org" +my-org-dir) "Code")
            "* %^{Brief Description}\tAdded: %U\t:Work:\n%?")
+          ("sn" "Study Note" entry
+           (file+headline ,(expand-file-name "study-note.org" +my-org-dir) "Note")
+           "* %^{Brief Description}\tAdded: %U\t:Study: :Note:\n%?")
           ("ps" "Protocol Text" plain
            (file+function ,(expand-file-name "web.org" +my-org-dir) org-capture-template-goto-link)
            "Added: %U\n\t%:initial" :empty-lines 1 :immediate-finish t :kill-buffer t)
