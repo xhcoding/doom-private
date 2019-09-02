@@ -5,10 +5,9 @@
 (package! visual-regexp-steroids)
 (package! org-edit-latex)
 (package! package-lint)
-
 (package! lsp-python-ms)
-
-(package! company-english-helper :recipe (:fetcher github :repo "manateelazycat/company-english-helper"))
+(package! keyfreq)
+(package! evil-matchit)
 
 (package! auto-save :ignore t)
 (package! openwith :ignore t)

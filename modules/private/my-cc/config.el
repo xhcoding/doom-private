@@ -2,8 +2,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-
-(def-package! cmake-project
+;; TODO: refactor
+(use-package! cmake-project
   :commands (cp-project-refresh cp-project-new cp-project-debug)
   :config
   (add-hook! (c-mode c++-mode) #'cp-project-refresh)
@@ -15,19 +15,9 @@
      (format "\nset(CMAKE_EXPORT_COMPILE_COMMANDS ON)")
      (format  "\nset(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)")
      (format "\nset(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)")
-     (format "\n\nadd_executable(main main.cc)")
+     (format "\n\nadd_executable(main main.cpp)")
      ))
   (setq cp-project-template-function '+my-cc-gen-template)
-  (when (and (not IS-WINDOWS) (featurep! :tools lsp))
-    (add-hook
-     'cp-after-new-project-hook
-     #'(lambda()
-         (shell-command
-          (concat
-           (format "echo \"\nint main() {\n  return 0;\n}\" > main.cc && ")
-           (format "touch %s/compile_commands.json && " cp-project-build-directory)
-           (format "ln -sf %s/compile_commands.json compile_commands.json" cp-project-build-directory)))
-         (cp-project-gen))))
   (map!
    (:mode (c-mode c++-mode)
      :gnvime "<f7>" #'cp-project-build
@@ -36,7 +26,7 @@
 (after! realgud
   (setq realgud-safe-mode nil))
 
-(def-package! my-work-c-style
+(use-package! my-work-c-style
   :load-path +my-ext-dir
   :config
   (add-hook! (c-mode c++-mode) #'my-work-set-c-style))

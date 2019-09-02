@@ -4,7 +4,7 @@
 (package! pyim)
 (if (featurep! +rime)
     (package! liberime-config
-      :recipe (:fetcher github
+      :recipe (:host github
                         :repo "xhcoding/liberime"
                         :files ("liberime-config.el" "src" "CMakeLists.txt" "Makefile"))))
 (package! fcitx)

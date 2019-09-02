@@ -101,31 +101,31 @@
   )
 
 
-(def-package! visual-regexp
+(use-package! visual-regexp
   :commands (vr/query-replace vr/replace))
 
-(def-package! package-lint
+(use-package! package-lint
   :commands (package-lint-current-buffer))
 
-(def-package! lsp-python-ms
+(use-package! lsp-python-ms
   :config
   (setq lsp-python-ms-dir (expand-file-name "mspyls/" doom-etc-dir))
   (setq lsp-python-ms-executable  (concat lsp-python-ms-dir
                                           "Microsoft.Python.LanguageServer"
                                           (and (eq system-type 'windows-nt) ".exe"))))
 
-(def-package! auto-save
+(use-package! auto-save
   :load-path +my-ext-dir
   :config
   (setq +my-auto-save-timer nil)
   (setq auto-save-slient t))
 
 
-(def-package! company-english-helper
+(use-package! company-english-helper
   :commands (toggle-company-english-helper))
 
 
-(def-package! openwith
+(use-package! openwith
   :load-path +my-ext-dir
   :config
   (setq openwith-associations
@@ -134,11 +134,11 @@
           ("\\.docx?\\'" "wps" (file))
           ("\\.pptx?\\'" "wpp" (file))
           ("\\.xlsx?\\'" "et" (file))))
-  (add-hook! :append 'emacs-startup-hook #'openwith-mode))
+  (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
 
 
-(def-package! eaf
+(use-package! eaf
   :load-path "/home/xhcoding/Code/ELisp/emacs-application-framework/"
   :commands (eaf-open)
   :config
@@ -160,3 +160,7 @@
 
   (map! :gnvime
         "M-l" #'pyim-convert-string-at-point))
+
+(use-package! keyfreq)
+
+(use-package! evil-matchit)

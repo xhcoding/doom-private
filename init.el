@@ -1,17 +1,19 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-;; 插件源
-(setq package-archives '(("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-                         ("org-cn"   . "http://elpa.emacs-china.org/org/")))
+;; 插件源 straight don't need it
+;; (setq package-archives '(("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+;;                          ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+;;                          ("org-cn"   . "http://elpa.emacs-china.org/org/")))
 
 ;; 调试模式
 (setq doom-debug-mode nil)
 
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
+
 ;; 代码片段
-(defvar +my-private-snippets-dir (expand-file-name "private/snippets/" doom-private-dir))
+(defvar +my-private-snippets-dir (expand-file-name "private/snippets/" "~/Documents/Org"))
+
 ;; Org文件
 (defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
 
@@ -102,9 +104,8 @@
  (default +bindings +smartparens)
 
  :private
- ;; lsp
  my-cc
  my-blog
  (my-chinese
-  +rime)
+ +rime)
  )
