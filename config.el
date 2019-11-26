@@ -87,7 +87,9 @@
    "l" #'lsp-ui-peek--select-next-file))
 
 (after! ccls
-  (setq ccls-initialization-options `(:cache (:directory ,(expand-file-name "~/Code/ccls_cache"))))
+  (setq ccls-initialization-options `(:cache (:directory ,(expand-file-name "~/Code/ccls_cache"))
+                                             :compilationDatabaseDirectory "build"))
+
   (setq ccls-sem-highlight-method 'font-lock)
   (ccls-use-default-rainbow-sem-highlight)
   (evil-set-initial-state 'ccls-tree-mode 'emacs)
@@ -164,3 +166,14 @@
 (use-package! keyfreq)
 
 (use-package! evil-matchit)
+
+;; server
+(setq server-auth-dir (expand-file-name doom-etc-dir))
+(setq server-name "emacs-server-file")
+(server-start)
+
+(when (eq system-type 'windows-nt)
+  (setq locale-coding-system 'gb18030)  ;此句保证中文字体设置有效
+  (setq w32-unicode-filenames 'nil)       ; 确保file-name-coding-system变量的设置不会无效
+  (setq file-name-coding-system 'gb18030) ; 设置文件名的编码为gb18030
+  )

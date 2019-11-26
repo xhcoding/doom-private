@@ -95,6 +95,7 @@
   +lsp)
  (rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
   +lsp)
+ qt
  
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides

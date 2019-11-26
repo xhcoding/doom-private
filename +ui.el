@@ -8,9 +8,28 @@
 ;; disable line-number
 (setq display-line-numbers-type nil)
 
+
+
 ;; font
-(setq doom-font (font-spec :family "Sarasa Term SC" :size 14))
-(setq doom-font (font-spec :family "Sarasa Term SC" :size 17))
+;;
+
+(let ((family )
+      (size 14)
+      (big-size 17))
+  (cond ((member "等距更纱黑体 SC" (font-family-list))
+         (setq family "等距更纱黑体 SC"))
+        ((member "Sarasa Term SC" (font-family-list))
+         (setq family "Sarasa Term SC" )))
+  (cond ((= 1920 (x-display-pixel-width))
+         (setq size 14)
+         (setq big-size 17))
+        ((= 3840 (x-display-pixel-width))
+         (setq size 30)
+         (setq big-size 35)))
+  (setq doom-font (font-spec :family family :size size))
+  (setq doom-big-font (font-spec :family family :size big-size))
+  )
+
 
 ;;
 ;;
