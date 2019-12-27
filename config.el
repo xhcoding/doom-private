@@ -167,6 +167,9 @@
 
 (use-package! evil-matchit)
 
+(use-package! nsis-mode
+  :mode ("\.[Nn][Ss][HhIi]\'". nsis-mode))
+
 ;; server
 (setq server-auth-dir (expand-file-name doom-etc-dir))
 (setq server-name "emacs-server-file")

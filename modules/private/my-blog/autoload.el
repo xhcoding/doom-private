@@ -26,7 +26,7 @@
           (format-time-string "%Y-%m-%d")))
     (concat
      "#+HUGO_BASE_DIR: ../"
-     "#+HUGO_SECTION: post"
+     "\n#+HUGO_SECTION: post"
      "\n#+TITLE: " file
      "\n#+DATE: " date
      "\n#+AUTHOR:"

@@ -91,7 +91,7 @@
  markdown          ; writing docs for people to ignore
  (go
   +lsp)
- (javascript        ; all(hope(abandon(ye(who(enter(here))))))
+ (javascript
   +lsp)
  (rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
   +lsp)
@@ -107,6 +107,5 @@
  :private
  my-cc
  my-blog
- (my-chinese
- +rime)
+ my-chinese
  )

@@ -8,6 +8,7 @@
 (package! lsp-python-ms)
 (package! keyfreq)
 (package! evil-matchit)
+(package! nsis-mode)
 
 (package! auto-save :ignore t)
 (package! openwith :ignore t)

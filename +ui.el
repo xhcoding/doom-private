@@ -11,24 +11,12 @@
 
 
 ;; font
-;;
 
-(let ((family )
-      (size 14)
-      (big-size 17))
-  (cond ((member "等距更纱黑体 SC" (font-family-list))
-         (setq family "等距更纱黑体 SC"))
-        ((member "Sarasa Term SC" (font-family-list))
-         (setq family "Sarasa Term SC" )))
-  (cond ((= 1920 (x-display-pixel-width))
-         (setq size 14)
-         (setq big-size 17))
-        ((= 3840 (x-display-pixel-width))
-         (setq size 30)
-         (setq big-size 35)))
-  (setq doom-font (font-spec :family family :size size))
-  (setq doom-big-font (font-spec :family family :size big-size))
-  )
+(if IS-WINDOWS
+    (setq doom-font "-outline-等距更纱黑体 SC-normal-normal-normal-mono-30-*-*-*-c-*-iso8859-1")
+  (setq doom-font "-outline-Sarasa Term SC-normal-normal-normal-mono-30-*-*-*-c-*-iso8859-1"))
+
+
 
 
 ;;

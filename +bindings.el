@@ -1,5 +1,9 @@
 ;;; config/private/+bindings.el -*- lexical-binding: t; -*-
 (map! [remap indent-region] #'+my/indent-or-format
+      :i "C-f" #'forward-char
+      :i "C-b" #'backward-char
+      :i "C-n" #'next-line
+      :i "C-p" #'previous-line
       (:leader
         (:prefix "o"
           :desc "Blog"             :n  "B"    #'easy-hugo
