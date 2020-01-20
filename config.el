@@ -12,7 +12,14 @@
 (after! evil-escape
   (setq evil-escape-key-sequence "jk"))
 
+  
 (after! projectile
+  (setq compilation-read-command nil)  ; no prompt in projectile-compile-project
+  (projectile-register-project-type 'cmake '("CMakeLists.txt")
+                                    :configure "cmake %s"
+                                    :compile "cmake --build Debug"
+                                    :test "ctest")
+
   (setq projectile-require-project-root t)
   (setq projectile-project-root-files-top-down-recurring
         (append '("compile_commands.json")
@@ -92,15 +99,7 @@
 
   (setq ccls-sem-highlight-method 'font-lock)
   (ccls-use-default-rainbow-sem-highlight)
-  (evil-set-initial-state 'ccls-tree-mode 'emacs)
-
-  (defun +my--suggest-project-root ()
-    (and (memq major-mode '(c-mode c++-mode cuda-mode objc-mode))
-         (when-let (dir (locate-dominating-file default-directory "compile_commands.json"))
-           (expand-file-name dir))))
-
-  (advice-add 'ccls--suggest-project-root :before-until #'+my--suggest-project-root)
-  )
+  (evil-set-initial-state 'ccls-tree-mode 'emacs))
 
 
 (use-package! visual-regexp
@@ -108,13 +107,6 @@
 
 (use-package! package-lint
   :commands (package-lint-current-buffer))
-
-(use-package! lsp-python-ms
-  :config
-  (setq lsp-python-ms-dir (expand-file-name "mspyls/" doom-etc-dir))
-  (setq lsp-python-ms-executable  (concat lsp-python-ms-dir
-                                          "Microsoft.Python.LanguageServer"
-                                          (and (eq system-type 'windows-nt) ".exe"))))
 
 (use-package! auto-save
   :load-path +my-ext-dir
@@ -163,12 +155,18 @@
   (map! :gnvime
         "M-l" #'pyim-convert-string-at-point))
 
+(after! geiser
+  (setq-default geiser-default-implementation 'chez))
+
 (use-package! keyfreq)
 
 (use-package! evil-matchit)
 
 (use-package! nsis-mode
   :mode ("\.[Nn][Ss][HhIi]\'". nsis-mode))
+
+(use-package! groovy-mode
+  :mode ("\.groovy\'" . groovy-mode))
 
 ;; server
 (setq server-auth-dir (expand-file-name doom-etc-dir))

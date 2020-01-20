@@ -5,10 +5,10 @@
 (package! visual-regexp-steroids)
 (package! org-edit-latex)
 (package! package-lint)
-(package! lsp-python-ms)
 (package! keyfreq)
 (package! evil-matchit)
 (package! nsis-mode)
+(package! groovy-mode)
 
 (package! auto-save :ignore t)
 (package! openwith :ignore t)

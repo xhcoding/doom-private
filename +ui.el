@@ -17,7 +17,8 @@
   (setq doom-font "-outline-Sarasa Term SC-normal-normal-normal-mono-30-*-*-*-c-*-iso8859-1"))
 
 
-
+;; banner
+(setq +doom-dashboard-banner-file (expand-file-name "img/ue-pink.png" doom-private-dir))
 
 ;;
 ;;

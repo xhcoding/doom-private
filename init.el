@@ -11,12 +11,11 @@
 ;; 扩展
 (defvar +my-ext-dir (expand-file-name "~/.config/doom/extensions"))
 
-;; 代码片段
-(defvar +my-private-snippets-dir (expand-file-name "private/snippets/" "~/Documents/Org"))
-
 ;; Org文件
 (defvar +my-org-dir (expand-file-name "~/Documents/Org/"))
 
+;; 代码片段
+(defvar +my-private-snippets-dir (expand-file-name "private/snippets/" +my-org-dir))
 
 (setq user-full-name "xhcoding"
       user-mail-address "xhcoding@163.com")
@@ -42,6 +41,7 @@
  nav-flash         ; blink the current line after jumping
  (window-select    ; visually switch windows
   +ace-window)
+ vc-gutter         ; vcs diff in the fringe
 
  treemacs          ; a project drawer, like neotree but cooler
  (popup            ; tame sudden yet inevitable temporary windows
@@ -88,14 +88,16 @@
  plantuml          ; diagrams for confusing people more
  (python
   +lsp)
- markdown          ; writing docs for people to ignore
- (go
+ (markdown          ; writing docs for people to ignore
+  +grip)
+  (go
   +lsp)
  (javascript
   +lsp)
  (rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
   +lsp)
  qt
+ scheme            ; a fully conniving family of lisps
  
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides
