@@ -3,3 +3,5 @@
 
 (package! ox-hugo)
 (package! easy-hugo)
+
+(package! org2blog)

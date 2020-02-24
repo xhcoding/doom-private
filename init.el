@@ -67,9 +67,11 @@
  :term
  vterm             ; another terminals in Emacs
 
+ :checkers
+ syntax              ; tasing you for every semicolon you forget
+
  :tools
  magit
- flycheck
  lsp
  eval              ; run code, run (also, repls)
  lookup           ; helps you navigate your code and documentation

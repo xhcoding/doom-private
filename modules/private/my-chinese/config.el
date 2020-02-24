@@ -57,4 +57,4 @@ when exporting org-mode to html."
            "\\1\\2"
            origin-contents)))
     (list paragraph fixed-contents info)))
-(advice-add #'org-html-paragraph :filter-args #'+chinese*org-html-paragraph)
+;; (advice-add #'org-html-paragraph :filter-args #'+chinese*org-html-paragraph)

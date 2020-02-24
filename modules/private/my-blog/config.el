@@ -21,3 +21,11 @@
         easy-hugo-org-header t)
   (evil-set-initial-state 'easy-hugo-mode 'emacs)
   (advice-add #'easy-hugo--org-headers :override #'+my-blog*easy-hugo--org-headers))
+
+
+(use-package! org2blog
+  :config
+  (setq org2blog/wp-blog-alist
+        '(("my-blog"
+           :url "https://xhcoding.cn/xmlrpc.php"
+           :username "xhcoding"))))

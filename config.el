@@ -33,6 +33,9 @@
         company-global-modes '(not comint-mode erc-mode message-mode help-mode gud-mode)
         ))
 
+(after! company-box
+  (setq company-box-doc-enable nil))
+
 
 (after! yasnippet
   (add-to-list 'yas-snippet-dirs #'+my-private-snippets-dir nil #'eq))
@@ -131,6 +134,11 @@
   (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
 (use-package! color-rg
+
+
+(use-package! eaf
+  :when IS-LINUX
+  :load-path "/home/xhcoding/Code/ELisp/emacs-application-framework/"
   :config
   (evil-set-initial-state 'color-rg-mode 'emacs)
   (set-popup-rule! "^\\*color" :size 0.5))
