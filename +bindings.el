@@ -17,5 +17,6 @@
           )
         (:prefix "r"
           :desc "replace"          :n  "r"    #'vr/replace
-          :desc "query replace"    :n  "R"    #'vr/query-replace)
+          :desc "query replace"    :n  "R"    #'vr/query-replace
+          :desc "color rg"         :n  "s"    #'color-rg-search-symbol-in-project)
         ))

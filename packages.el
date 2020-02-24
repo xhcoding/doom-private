@@ -10,5 +10,7 @@
 (package! nsis-mode)
 (package! groovy-mode)
 
+(package! color-rg :recipe (:host github :repo "manateelazycat/color-rg"))
+
 (package! auto-save :ignore t)
 (package! openwith :ignore t)

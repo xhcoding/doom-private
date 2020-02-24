@@ -130,13 +130,10 @@
           ("\\.xlsx?\\'" "et" (file))))
   (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
-
-
-(use-package! eaf
-  :load-path "/home/xhcoding/Code/ELisp/emacs-application-framework/"
-  :commands (eaf-open)
+(use-package! color-rg
   :config
-  (evil-set-initial-state 'eaf-mode 'emacs))
+  (evil-set-initial-state 'color-rg-mode 'emacs)
+  (set-popup-rule! "^\\*color" :size 0.5))
 
 (after! pyim
   (setq pyim-page-tooltip 'posframe)
