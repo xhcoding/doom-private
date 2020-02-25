@@ -2,11 +2,11 @@
 ;;; input/chinese/packages.el
 
 (package! pyim)
-(if (featurep! +rime)
-    (package! liberime-config
-      :recipe (:host github
-                        :repo "xhcoding/liberime"
-                        :files ("liberime-config.el" "src" "CMakeLists.txt" "Makefile"))))
+
+(when (featurep! +rime)
+    (package! liberime-config :ignore t))
+
+
 (package! fcitx)
 (package! ace-pinyin)
 (package! pangu-spacing)

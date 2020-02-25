@@ -133,7 +133,7 @@
           ("\\.xlsx?\\'" "et" (file))))
   (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
-(use-package! color-rg
+(use-package! color-rg)
 
 
 (use-package! eaf

@@ -111,5 +111,6 @@
  :private
  my-cc
  my-blog
- my-chinese
+ (my-chinese
+  +rime)
  )
