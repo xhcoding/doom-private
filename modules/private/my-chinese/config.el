@@ -12,14 +12,9 @@
 
 (use-package! liberime-config
   :when (featurep! +rime)
-  :load-path "D:/Code/CCPro/liberime"
+  :load-path (lambda()(expand-file-name "liberime" +my-ext-dir))
   :defer 1
-  :init
-  (add-hook 'after-liberime-load-hook
-            (lambda ()
-              (liberime-select-schema "luna_pinyin_simp")))
   :config
-  (setq liberime-shared-data-dir (expand-file-name "C:/Program Files (x86)/Rime/weasel-0.14.3/data"))
   (setq liberime-user-data-dir (expand-file-name "pyim/rime" doom-etc-dir))
   (liberime-load)
   )

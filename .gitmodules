@@ -1,0 +1,3 @@
+[submodule "extensions/liberime"]
+	path = extensions/liberime
+	url = git@github.com:xhcoding/liberime.git
