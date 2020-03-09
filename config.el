@@ -79,7 +79,8 @@
 (global-auto-revert-mode 0)
 
 (after! lsp
-  (setq lsp-auto-guess-root t))
+  (setq lsp-auto-guess-root t)
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]build$" ))
 
 (after! lsp-ui
   (add-hook! 'lsp-ui-mode-hook #'lsp-ui-doc-mode)

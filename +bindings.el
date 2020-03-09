@@ -4,6 +4,7 @@
       :i "C-b" #'backward-char
       :i "C-n" #'next-line
       :i "C-p" #'previous-line
+      :i "M-i" #'pyim-convert-string-at-point
       (:leader
         (:prefix "o"
           :desc "Blog"             :n  "B"    #'easy-hugo

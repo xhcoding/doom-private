@@ -4,7 +4,7 @@
 (package! pyim)
 
 (when (featurep! +rime)
-    (package! liberime-config :ignore t))
+    (package! liberime :ignore t))
 
 
 (package! fcitx)

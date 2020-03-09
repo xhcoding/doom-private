@@ -10,14 +10,13 @@
     (setq pyim-default-scheme 'rime)))
 
 
-(use-package! liberime-config
+(use-package! liberime
   :when (featurep! +rime)
   :load-path (lambda()(expand-file-name "liberime" +my-ext-dir))
   :defer 1
   :config
   (setq liberime-user-data-dir (expand-file-name "pyim/rime" doom-etc-dir))
-  (liberime-load)
-  )
+  (liberime-load))
 
 
 (use-package! pangu-spacing
@@ -55,3 +54,26 @@ when exporting org-mode to html."
            origin-contents)))
     (list paragraph fixed-contents info)))
 ;; (advice-add #'org-html-paragraph :filter-args #'+chinese*org-html-paragraph)
+
+(when IS-WINDOWS
+  (defconst goldendict-program "D:/Software/GoldenDict/GoldenDict.exe"))
+
+(defun sdcv-region-or-word ()
+  "Return region or word around point.
+If `mark-active' on, return region string.
+Otherwise return word around point."
+  (if mark-active
+      (buffer-substring-no-properties (region-beginning)
+                                      (region-end))
+    (thing-at-point 'word)))
+
+(defun goldendict-open-translate-popup (word)
+  "Call goldendict to open translate popup window"
+  (message "%s" word)
+  (shell-command-to-string
+   (format "%s  %s" goldendict-program word)))
+
+(defun goldendict-search-pointer()
+  "Search current point word or region"
+  (interactive)
+  (goldendict-open-translate-popup (sdcv-region-or-word)))
