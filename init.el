@@ -87,6 +87,8 @@
  +ipython         ; ipython support for babel
  +pandoc          ; pandoc integration into org's exporter
  +present)        ; using Emacs for presentations
+ (php               ; perl's insecure younger brother
+  +lsp)
  plantuml          ; diagrams for confusing people more
  (python
   +lsp)
@@ -100,6 +102,7 @@
   +lsp)
  qt
  scheme            ; a fully conniving family of lisps
+ web               ; the tubes
  
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides

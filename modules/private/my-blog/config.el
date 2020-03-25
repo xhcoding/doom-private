@@ -24,6 +24,7 @@
 
 
 (use-package! org2blog
+  :disabled t
   :config
   (setq org2blog/wp-blog-alist
         '(("my-blog"

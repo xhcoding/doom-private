@@ -12,7 +12,7 @@
 (after! evil-escape
   (setq evil-escape-key-sequence "jk"))
 
-  
+
 (after! projectile
   (setq compilation-read-command nil)  ; no prompt in projectile-compile-project
   (projectile-register-project-type 'cmake '("CMakeLists.txt")
@@ -40,6 +40,9 @@
 (after! yasnippet
   (add-to-list 'yas-snippet-dirs #'+my-private-snippets-dir nil #'eq))
 
+(after! grip
+  (setq grip-github-user "xhcoding")
+  (setq grip-github-password "fd0074706311dc0edb162d78f328a2e32b0f7ab3"))
 
 
 (after! format
@@ -79,8 +82,8 @@
 (global-auto-revert-mode 0)
 
 (after! lsp
-  (setq lsp-auto-guess-root t)
-  (add-to-list 'lsp-file-watch-ignored "[/\\\\]build$" ))
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]build" )
+  (setq +lsp-company-backend 'company-capf))
 
 (after! lsp-ui
   (add-hook! 'lsp-ui-mode-hook #'lsp-ui-doc-mode)
@@ -134,10 +137,57 @@
           ("\\.xlsx?\\'" "et" (file))))
   (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
+(use-package! awesome-tab
+  :config
+  (awesome-tab-mode +1)
+  (setq awesome-tab-height 100)
+  (defhydra awesome-fast-switch (:hint nil)
+    "
+ ^^^^Fast Move             ^^^^Tab                    ^^Search            ^^Misc
+-^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
+   ^_k_^   prev group    | _C-a_^^     select first | _b_ search buffer | _C-k_   kill buffer
+ _h_   _l_  switch tab   | _C-e_^^     select last  | _g_ search group  | _C-S-k_ kill others in group
+   ^_j_^   next group    | _C-j_^^     ace jump     | ^^                | ^^
+ ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current | ^^                | ^^
+-^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
+"
+    ("h" awesome-tab-backward-tab)
+    ("j" awesome-tab-forward-group)
+    ("k" awesome-tab-backward-group)
+    ("l" awesome-tab-forward-tab)
+    ("0" my-select-window)
+    ("1" my-select-window)
+    ("2" my-select-window)
+    ("3" my-select-window)
+    ("4" my-select-window)
+    ("5" my-select-window)
+    ("6" my-select-window)
+    ("7" my-select-window)
+    ("8" my-select-window)
+    ("9" my-select-window)
+    ("C-a" awesome-tab-select-beg-tab)
+    ("C-e" awesome-tab-select-end-tab)
+    ("C-j" awesome-tab-ace-jump)
+    ("C-h" awesome-tab-move-current-tab-to-left)
+    ("C-l" awesome-tab-move-current-tab-to-right)
+    ("b" ivy-switch-buffer)
+    ("g" awesome-tab-counsel-switch-group)
+    ("C-k" kill-current-buffer)
+    ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
+    ("q" nil "quit"))
+  (map!
+   :i   "C-c t" #'awesome-tab-ace-jump
+   :i   "C-c T" #'awesome-fast-switch/body
+   (:leader
+     (:prefix "c"
+       :desc "switch tab"         :nv    "t" #'awesome-tab-ace-jump
+       :desc "switch tab hydra"    :nv   "T" #'awesome-fast-switch/body)))
+  )
+
+
 (use-package! color-rg
   :config
   (evil-set-initial-state 'color-rg-mode 'emacs))
-
 
 (use-package! eaf
   :when IS-LINUX
@@ -150,7 +200,7 @@
                                (and (not (string-match-p "QT_SCALE_FACTOR" var))
                                     (not (string-match-p "QT_SCREEN_SCALE_FACTOR" var)))) process-environment))
 
-  (eaf-setq eaf-browser-default-zoom  "2") 
+  (eaf-setq eaf-browser-default-zoom  "2")
   (set-popup-rule! "^\\*color" :size 0.5))
 
 (after! pyim
@@ -193,3 +243,5 @@
   (setq w32-unicode-filenames 'nil)       ; 确保file-name-coding-system变量的设置不会无效
   (setq file-name-coding-system 'gb18030) ; 设置文件名的编码为gb18030
   )
+
+(toggle-frame-fullscreen)

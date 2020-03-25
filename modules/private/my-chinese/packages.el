@@ -4,7 +4,8 @@
 (package! pyim)
 
 (when (featurep! +rime)
-    (package! liberime :ignore t))
+  (package! liberime :ignore t))
+
 
 
 (package! fcitx)

@@ -1,12 +1,6 @@
 ;;; private/my-blog/autoload.el -*- lexical-binding: t; -*-
 
-;;;###autoload
-(defun +my-blog/open-org-octopress()
-  (interactive)
-  (let ((buffer (get-buffer "Octopress")))
-    (if buffer
-        (switch-to-buffer buffer)
-      (org-octopress))))
+(require 'seq)
 
 ;;;###autoload
 (defun +my-blog*export-blog-image-url(filename)
@@ -55,8 +49,28 @@
   (+my-blog-kill-new-img-link
    +my-blog-img-dir (concat filename ".png")))
 
+
 ;;;###autoload
-(defun +my-blog/org-save-and-export ()
+(defun +my-blog/publish()
   (interactive)
-  (org-octopress-setup-publish-project)
-  (org-publish-project "octopress" t))
+  (let ((default-directory +my-blog-root-dir))
+    (call-process-shell-command "hugo")
+    (setq default-directory (expand-file-name "public" +my-blog-root-dir))
+    (call-process-shell-command "git add .")
+    (call-process-shell-command "git commit -m \"publish\"")
+    (call-process-shell-command "git push")
+    (message "publish finished")))
+
+;;;###autoload
+(defun +my-blog/export-all()
+  (interactive)
+  (let ((default-directory (expand-file-name "blog" +my-blog-root-dir))
+        (files (directory-files (expand-file-name
+                                 "blog" +my-blog-root-dir))))
+    (seq-each
+     (lambda(file)
+       (when (and (not (string-equal "." file)) (not (string-equal ".." file)) (not (string-equal "config.toml" file)))
+         (with-temp-buffer
+           (find-file file)
+           (org-hugo-export-to-md))))
+     files)))

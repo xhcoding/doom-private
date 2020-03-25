@@ -58,6 +58,10 @@ when exporting org-mode to html."
 (when IS-WINDOWS
   (defconst goldendict-program "D:/Software/GoldenDict/GoldenDict.exe"))
 
+(when IS-WINDOWS
+  (defconst zeal-program "\"C:/Program Files/Zeal/zeal.exe\""))
+
+
 (defun sdcv-region-or-word ()
   "Return region or word around point.
 If `mark-active' on, return region string.
@@ -77,3 +81,7 @@ Otherwise return word around point."
   "Search current point word or region"
   (interactive)
   (goldendict-open-translate-popup (sdcv-region-or-word)))
+
+(defun zeal-search-pointer()
+  (interactive)
+  (shell-command-to-string (format "%s %s" zeal-program (sdcv-region-or-word))))
