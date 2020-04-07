@@ -1,14 +1,4 @@
-* 简介
-** 新建工程 ~cp-project-new~
-[[img/new-project.gif]]
-** 补全
-[[img/complete.gif]]
-** 查看定义和引用 ~lsp-ui-peek-find-definitions lsp-ui-peek-find-references~
-[[img/def.gif]]
-** 运行 ~cp-project-run~
-[[img/run.gif]]
-** 调试 ~dap-debug~
-[[img/debug.gif]]
+
 * 安装
 ** 安装配置文件
 #+BEGIN_SRC shell
@@ -49,9 +39,4 @@ CMAKE_PREFIX_PATH 为你的llvm的目录。
 ** 安装调试服务端lldb-vscode
 [[https://github.com/llvm-mirror/lldb/tree/master/tools/lldb-vscode][安装方法]]
 
-* 用法
-打开一个CMake 项目后先运行 M-x cp-project-refresh
-- 新建项目：M-x cp-project-new
-- 生成CMake 配置文件：M-x cp-project-gen
-- 构建项目：cp-project-build
-- 运行项目：cp-project-run
+
