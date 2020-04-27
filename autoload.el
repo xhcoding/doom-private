@@ -153,4 +153,3 @@
     (if (and exists-eaf-buffer eaf-buffer-window)
         (pop-to-buffer exists-eaf-buffer)
       (eaf-open url app-name "--synctex_on=True"))))
-

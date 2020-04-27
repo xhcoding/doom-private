@@ -11,7 +11,6 @@
 (package! groovy-mode)
 
 (package! color-rg :recipe (:host github :repo "manateelazycat/color-rg"))
-(package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab"))
 
 (package! auto-save :ignore t)
 (package! openwith :ignore t)

@@ -1,4 +1,5 @@
-;;; init.el -*- lexical-binding: t; -*-
+
+
 
 ;; 插件源 straight don't need it
 ;; (setq package-archives '(("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
@@ -103,7 +104,7 @@
  qt
  scheme            ; a fully conniving family of lisps
  web               ; the tubes
- 
+
  :config
  ;; The default module set reasonable defaults for Emacs. It also provides
  ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,

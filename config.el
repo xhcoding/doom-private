@@ -104,8 +104,6 @@
   (setq ccls-initialization-options `(:cache (:directory ,(expand-file-name "~/Code/ccls_cache"))
                                              :compilationDatabaseDirectory "build"))
 
-  (setq ccls-sem-highlight-method 'font-lock)
-  (ccls-use-default-rainbow-sem-highlight)
   (evil-set-initial-state 'ccls-tree-mode 'emacs))
 
 
@@ -118,8 +116,9 @@
 (use-package! auto-save
   :load-path +my-ext-dir
   :config
-  (setq +my-auto-save-timer nil)
-  (setq auto-save-slient t))
+  (auto-save-enable)
+  (setq auto-save-slient t)
+  (setq auto-save-delete-trailing-whitespace t))
 
 
 (use-package! company-english-helper
@@ -137,93 +136,42 @@
           ("\\.xlsx?\\'" "et" (file))))
   (add-hook! 'emacs-startup-hook :append #'openwith-mode))
 
-(use-package! awesome-tab
-  :config
-  (awesome-tab-mode +1)
-  (setq awesome-tab-height 100)
-  (defhydra awesome-fast-switch (:hint nil)
-    "
- ^^^^Fast Move             ^^^^Tab                    ^^Search            ^^Misc
--^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
-   ^_k_^   prev group    | _C-a_^^     select first | _b_ search buffer | _C-k_   kill buffer
- _h_   _l_  switch tab   | _C-e_^^     select last  | _g_ search group  | _C-S-k_ kill others in group
-   ^_j_^   next group    | _C-j_^^     ace jump     | ^^                | ^^
- ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current | ^^                | ^^
--^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
-"
-    ("h" awesome-tab-backward-tab)
-    ("j" awesome-tab-forward-group)
-    ("k" awesome-tab-backward-group)
-    ("l" awesome-tab-forward-tab)
-    ("0" my-select-window)
-    ("1" my-select-window)
-    ("2" my-select-window)
-    ("3" my-select-window)
-    ("4" my-select-window)
-    ("5" my-select-window)
-    ("6" my-select-window)
-    ("7" my-select-window)
-    ("8" my-select-window)
-    ("9" my-select-window)
-    ("C-a" awesome-tab-select-beg-tab)
-    ("C-e" awesome-tab-select-end-tab)
-    ("C-j" awesome-tab-ace-jump)
-    ("C-h" awesome-tab-move-current-tab-to-left)
-    ("C-l" awesome-tab-move-current-tab-to-right)
-    ("b" ivy-switch-buffer)
-    ("g" awesome-tab-counsel-switch-group)
-    ("C-k" kill-current-buffer)
-    ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
-    ("q" nil "quit"))
-  (map!
-   :i   "C-c t" #'awesome-tab-ace-jump
-   :i   "C-c T" #'awesome-fast-switch/body
-   (:leader
-     (:prefix "c"
-       :desc "switch tab"         :nv    "t" #'awesome-tab-ace-jump
-       :desc "switch tab hydra"    :nv   "T" #'awesome-fast-switch/body)))
-  )
-
-
 (use-package! color-rg
   :config
   (evil-set-initial-state 'color-rg-mode 'emacs))
 
 (use-package! eaf
-  :when IS-LINUX
-  :load-path "/home/xhcoding/Code/ELisp/emacs-application-framework/"
+  :load-path "D:/Code/ELisp/emacs-application-framework/"
+  :init
+  (setq eaf-python-command "python")
   :config
   (evil-set-initial-state 'eaf-mode 'emacs)
-  (require 'seq)
-  (setq process-environment (seq-filter
-                             (lambda(var)
-                               (and (not (string-match-p "QT_SCALE_FACTOR" var))
-                                    (not (string-match-p "QT_SCREEN_SCALE_FACTOR" var)))) process-environment))
+  (eaf-setq eaf-browser-default-zoom  "2"))
 
-  (eaf-setq eaf-browser-default-zoom  "2")
-  (set-popup-rule! "^\\*color" :size 0.5))
 
 (after! pyim
   (setq pyim-page-tooltip 'posframe)
-
+  
   (setq-default pyim-english-input-switch-functions
                 '(
                   pyim-probe-dynamic-english
                   pyim-probe-isearch-mode
                   pyim-probe-program-mode
                   pyim-probe-org-structure-template))
-
+  
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
-
+  
   (map! :gnvime
         "M-l" #'pyim-convert-string-at-point))
 
 (after! geiser
   (setq-default geiser-default-implementation 'chez))
 
-(use-package! keyfreq)
+(use-package! keyfreq
+  :config
+  (keyfreq-mode +1))
 
 (use-package! evil-matchit)
 
