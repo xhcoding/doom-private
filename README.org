@@ -5,37 +5,10 @@
 git clone -b develop https://github.com/hlissner/.emacs.d ~/.emacs.d
 git clone https://github.com/xhcoding/doom-private.git ~/.config/doom
 cd ~/.emacs.d
-make all
+~/.emacs.d/bin/doom install
 #+END_SRC
 ** 安装补全服务端ccls
 补全需要的服务端，[[https://github.com/MaskRay/ccls/wiki/Build][ccls安装方法]]
-*** Windows VS 工具链安装方法
-1. 第一步：安装VS2017及以上版本，安装时勾选上CMake
-2. 第二步：编译 clang及lldb（为了使用lldb-vscode 调试）
-打开 =适用于VS2017的x64本机工具命令提示= 这个cmd
-#+BEGIN_SRC shell
-// 下载源码
-git clone https://mirrors.tuna.tsinghua.edu.cn/git/llvm/llvm.git
-git clone https://mirrors.tuna.tsinghua.edu.cn/git/llvm/clang.git llvm/tools/clang
-git clone https://mirrors.tuna.tsinghua.edu.cn/git/llvm/lldb.git llvm/tools/lldb
-// 进入目录
-cd llvm
-// 编译
-cmake -H. -BRelease -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=cl -DCMAKE_CXX_COMPILER=cl -DLLVM_TARGETS_TO_BUILD=X86
-ninja -C Release clangFormat clangFrontendTool clangIndex clangTooling clang lldb
-#+END_SRC
-3. 第三步：编译 ccls
-#+BEGIN_SRC shell
-// 下载代码
-git clone  --recursive https://github.com/MaskRay/ccls
-// 生成
-cmake -H. -BRelease -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang-cl -DSYSTEM_CLANG=On -DCMAKE_PREFIX_PATH="D:/Code/CCPro/llvm/Release;D:/Code/CCPro/llvm/Release/tools/clang;D:/Code/CCPro/llvm;D:/Code/CCPro/llvm/tools/clang"
-// 构建
-ninja -C Release
-#+END_SRC
-CMAKE_PREFIX_PATH 为你的llvm的目录。
-
-最后把 ccls和lldb-vscode 放到 $PATH 里
 ** 安装调试服务端lldb-vscode
 [[https://github.com/llvm-mirror/lldb/tree/master/tools/lldb-vscode][安装方法]]
 
