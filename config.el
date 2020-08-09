@@ -42,7 +42,7 @@
 
 (after! grip
   (setq grip-github-user "xhcoding")
-  (setq grip-github-password "fd0074706311dc0edb162d78f328a2e32b0f7ab3"))
+  (setq grip-github-password "personal_acccess_token"))
 
 
 (after! format
